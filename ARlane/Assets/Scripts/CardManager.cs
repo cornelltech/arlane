@@ -15,6 +15,7 @@ public class CardManager : MonoBehaviour, IInputClickHandler, IFocusable
     public Material frontCard;
     public Material frontCardActive;
     public int rotationSpeed = 10;
+    public bool visible = false;
 
     private GameObject front;
     private GameObject back;
