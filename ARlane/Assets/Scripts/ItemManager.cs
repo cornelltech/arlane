@@ -12,10 +12,12 @@ using System;
 public class ItemManager : MonoBehaviour, IInputClickHandler, IFocusable
 {
 
+    private GameObject scanner;
+
     // Use this for initialization
     void Start()
     {
-
+        scanner = transform.Find("Scanner").gameObject;
     }
 
     // Update is called once per frame
@@ -29,12 +31,14 @@ public class ItemManager : MonoBehaviour, IInputClickHandler, IFocusable
 
     public void OnInputClicked(InputEventData eventData)
     {
-       
+        
     }
 
     public void OnFocusEnter()
     {
-        
+        scanner.GetComponent<ScannerManager>().Show();
+        scanner.GetComponent<ScannerManager>().startTime = Time.time;
+        scanner.GetComponent<ScannerManager>().performScan = true;
     }
 
     public void OnFocusExit()
