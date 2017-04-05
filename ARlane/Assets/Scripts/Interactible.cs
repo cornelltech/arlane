@@ -12,28 +12,27 @@ public class Interactible : MonoBehaviour
     public Material frontCardActive;
 
     private GameObject front;
+    private GameObject back;
     
     void Start()
     {
-        print("START START");
         front = gameObject.transform.Find("Front").gameObject;
     }
 
     void GazeEntered()
     {
-        print("I am gazing");
+        print("GazeEntered");
         front.GetComponent<Renderer>().material = frontCardActive;
-
     }
     void GazeExited()
     {
-        print("I am not gazing");
+        print("GazeExited");
         front.GetComponent<Renderer>().material = frontCard;
     }
 
     void OnSelect()
     {
-        print("I am selecting");
-
+        print("OnSelect");
+        //transform.Rotate(Vector3.right);
     }
 }

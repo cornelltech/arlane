@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TagAlong
   - Card
+  - Item
   layers:
   - Default
   - TransparentFX

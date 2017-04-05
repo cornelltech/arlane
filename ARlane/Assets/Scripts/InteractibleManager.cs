@@ -47,7 +47,6 @@ public class InteractibleManager : Singleton<InteractibleManager> {
             {
                 if (FocusedGameObject.GetComponent<Interactible>() != null)
                 {
-                    print("DISPATCH ENTERERD");
                     // 2.c: Send a GazeEntered message to the FocusedGameObject.
                     FocusedGameObject.SendMessage("GazeEntered");
                 }

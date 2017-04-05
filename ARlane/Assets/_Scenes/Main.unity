@@ -350,8 +350,6 @@ GameObject:
   - component: {fileID: 1352536125}
   - component: {fileID: 1352536126}
   - component: {fileID: 1352536127}
-  - component: {fileID: 1352536128}
-  - component: {fileID: 1352536129}
   m_Layer: 0
   m_Name: Card
   m_TagString: Card
@@ -399,38 +397,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   frontCard: {fileID: 2100000, guid: 6e055a21ab11a984a93265065dd6a51b, type: 2}
   frontCardActive: {fileID: 2100000, guid: b7687cc876d50a34db3accf5caa40feb, type: 2}
---- !u!114 &1352536128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1352536124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8d5b128a1d8204fb76c86f47b75912, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PivotAxis: 0
---- !u!114 &1352536129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1352536124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37870ab7a81bfb74b9fa277cf45b06d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SetStabilizationPlane: 1
-  UseUnscaledTime: 1
-  LerpStabilizationPlanePowerCloser: 4
-  LerpStabilizationPlanePowerFarther: 7
-  targetOverride: {fileID: 0}
-  trackVelocity: 0
-  UseGazeManager: 1
-  DefaultPlaneDistance: 2
-  DrawGizmos: 0
 --- !u!1 &1581542771
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,11 +598,9 @@ GameObject:
   - component: {fileID: 1817375662}
   - component: {fileID: 1817375661}
   - component: {fileID: 1817375660}
-  - component: {fileID: 1817375664}
-  - component: {fileID: 1817375665}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -705,29 +669,3 @@ Transform:
   m_Father: {fileID: 782582748}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1817375664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1817375659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a880199737c234ab01ebb87e371e50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frontCard: {fileID: 0}
-  frontCardActive: {fileID: 0}
---- !u!114 &1817375665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1817375659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a880199737c234ab01ebb87e371e50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frontCard: {fileID: 0}
-  frontCardActive: {fileID: 0}
