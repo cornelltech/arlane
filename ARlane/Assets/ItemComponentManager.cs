@@ -7,9 +7,9 @@ using System;
 
 
 /// <summary>
-/// Responsible for handling the item events
+/// Responsible for handling the item component events
 /// </summary>
-public class ItemManager : MonoBehaviour, IInputClickHandler, IFocusable
+public class ItemComponentManager : MonoBehaviour, IInputClickHandler, IFocusable
 {
 
     // Use this for initialization
@@ -29,12 +29,12 @@ public class ItemManager : MonoBehaviour, IInputClickHandler, IFocusable
 
     public void OnInputClicked(InputEventData eventData)
     {
-       
+
     }
 
     public void OnFocusEnter()
     {
-        
+
     }
 
     public void OnFocusExit()

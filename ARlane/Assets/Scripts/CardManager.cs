@@ -15,7 +15,7 @@ public class CardManager : MonoBehaviour, IInputClickHandler, IFocusable
     public Material frontCard;
     public Material frontCardActive;
     public int rotationSpeed = 10;
-    public bool visible = false;
+    public bool isVisible = false;
 
     private GameObject front;
     private GameObject back;
@@ -25,6 +25,15 @@ public class CardManager : MonoBehaviour, IInputClickHandler, IFocusable
     // Use this for initialization
     void Start () {
         front = gameObject.transform.Find("Front").gameObject;
+        back  = gameObject.transform.Find("Back").gameObject;
+
+        if (isVisible)
+        {
+            Show();
+        }else
+        {
+            Hide();
+        }
     }
 	
 	// Update is called once per frame
@@ -32,6 +41,14 @@ public class CardManager : MonoBehaviour, IInputClickHandler, IFocusable
         if (canRotate)
         {
             RotateCard();
+        }
+
+        if (isVisible)
+        {
+            Show();
+        }else
+        {
+            Hide();
         }
     }
 
@@ -55,7 +72,7 @@ public class CardManager : MonoBehaviour, IInputClickHandler, IFocusable
 
 
 
-    void RotateCard()
+    private void RotateCard()
     {
         transform.Rotate(new Vector3(0, 1, 0), 10, Space.Self);
 
@@ -65,6 +82,24 @@ public class CardManager : MonoBehaviour, IInputClickHandler, IFocusable
             rotationCount = 0;
             canRotate = false;
         }
+    }
 
+    private void Show()
+    {
+        if (!front.GetComponent<Renderer>().enabled && !back.GetComponent<Renderer>().enabled)
+        {
+            front.GetComponent<Renderer>().enabled = true;
+            back.GetComponent<Renderer>().enabled = true;
+            isVisible = true;
+        }
+    }
+    private void Hide()
+    {
+        if( front.GetComponent<Renderer>().enabled && back.GetComponent<Renderer>().enabled)
+        {
+            front.GetComponent<Renderer>().enabled = false;
+            back.GetComponent<Renderer>().enabled = false;
+            isVisible = false;
+        }   
     }
 }
