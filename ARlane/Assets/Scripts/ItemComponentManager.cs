@@ -19,6 +19,8 @@ public class ItemComponentManager : MonoBehaviour, IInputClickHandler, IFocusabl
 	void Start () {
         card = gameObject.transform.Find("Card").gameObject;
         cardManager = card.GetComponent<CardManager>();
+
+        cardManager.isVisible = true;
 	}
 	
 	// Update is called once per frame
@@ -33,7 +35,7 @@ public class ItemComponentManager : MonoBehaviour, IInputClickHandler, IFocusabl
 
     public void OnFocusEnter()
     {
-        cardManager.isVisible = true;
+        //cardManager.isVisible = true;
     }
 
     public void OnFocusExit()
