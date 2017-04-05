@@ -294,7 +294,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1288019608}
-  - component: {fileID: 1288019609}
   - component: {fileID: 1288019610}
   m_Layer: 0
   m_Name: Managers
@@ -318,17 +317,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1288019609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1288019607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd9884d7bf132345b919f8cb6880bdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1288019610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352536125}
   - component: {fileID: 1352536126}
-  - component: {fileID: 1352536127}
+  - component: {fileID: 1352536128}
   m_Layer: 0
   m_Name: Card
   m_TagString: Card
@@ -384,7 +372,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1352536127
+--- !u!114 &1352536128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -392,11 +380,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1352536124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55a880199737c234ab01ebb87e371e50, type: 3}
+  m_Script: {fileID: 11500000, guid: 76540065f842242499bff371afab76fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   frontCard: {fileID: 2100000, guid: 6e055a21ab11a984a93265065dd6a51b, type: 2}
   frontCardActive: {fileID: 2100000, guid: b7687cc876d50a34db3accf5caa40feb, type: 2}
+  rotationSpeed: 10
 --- !u!1 &1581542771
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +600,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1817375659}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
