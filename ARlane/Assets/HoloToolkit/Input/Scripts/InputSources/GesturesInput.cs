@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.VR.WSA.Input;
 
 namespace HoloToolkit.Unity.InputModule
@@ -13,24 +12,25 @@ namespace HoloToolkit.Unity.InputModule
     /// </summary>
     public class GesturesInput : BaseInputSource
     {
-        // This enumeration gives the manager two different ways to handle the recognizer. Both will
-        // set up the recognizer. The first causes the recognizer to start
-        // immediately. The second allows the recognizer to be manually started at a later time.
-        public enum RecognizerStartBehavior { AutoStart, ManualStart };
-
-        [Tooltip("Whether the recognizer should be activated on start.")]
-        public RecognizerStartBehavior RecognizerStart;
-
         [Tooltip("Set to true to use the use rails (guides) for the navigation gesture, as opposed to full 3D navigation.")]
         public bool UseRailsNavigation = false;
 
-        protected GestureRecognizer gestureRecognizer;
-        protected GestureRecognizer navigationGestureRecognizer;
+        private GestureRecognizer gestureRecognizer;
+        private GestureRecognizer navigationGestureRecognizer;
 
-        protected override void Start()
+        public override SupportedInputEvents SupportedEvents
         {
-            base.Start();
+            get
+            {
+                return SupportedInputEvents.SourceClicked |
+                        SupportedInputEvents.Hold |
+                        SupportedInputEvents.Manipulation |
+                        SupportedInputEvents.Navigation;
+            }
+        }
 
+        private void Awake()
+        {
             gestureRecognizer = new GestureRecognizer();
             gestureRecognizer.TappedEvent += OnTappedEvent;
             
@@ -46,6 +46,7 @@ namespace HoloToolkit.Unity.InputModule
             gestureRecognizer.SetRecognizableGestures(GestureSettings.Tap | 
                                                       GestureSettings.ManipulationTranslate |
                                                       GestureSettings.Hold);
+            gestureRecognizer.StartCapturingGestures();
 
             // We need a separate gesture recognizer for navigation, since it isn't compatible with manipulation
             navigationGestureRecognizer = new GestureRecognizer();
@@ -67,19 +68,14 @@ namespace HoloToolkit.Unity.InputModule
                                                                     GestureSettings.NavigationY |
                                                                     GestureSettings.NavigationZ);
             }
-
-            if (RecognizerStart == RecognizerStartBehavior.AutoStart)
-            {
-                gestureRecognizer.StartCapturingGestures();
-                navigationGestureRecognizer.StartCapturingGestures();
-            }
+            navigationGestureRecognizer.StartCapturingGestures();
         }
 
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
         {
-            StopGestureRecognizer();
             if (gestureRecognizer != null)
             {
+                gestureRecognizer.StopCapturingGestures();
                 gestureRecognizer.TappedEvent -= OnTappedEvent;
 
                 gestureRecognizer.HoldStartedEvent -= OnHoldStartedEvent;
@@ -93,120 +89,80 @@ namespace HoloToolkit.Unity.InputModule
 
                 gestureRecognizer.Dispose();
             }
-            if (navigationGestureRecognizer != null)
-            {
-                navigationGestureRecognizer.NavigationStartedEvent -= OnNavigationStartedEvent;
-                navigationGestureRecognizer.NavigationUpdatedEvent -= OnNavigationUpdatedEvent;
-                navigationGestureRecognizer.NavigationCompletedEvent -= OnNavigationCompletedEvent;
-                navigationGestureRecognizer.NavigationCanceledEvent -= OnNavigationCanceledEvent;
 
-                navigationGestureRecognizer.Dispose();
-            }
+            base.OnDestroy();
         }
 
-        protected virtual void OnDisable()
+        private void OnTappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
         {
-            StopGestureRecognizer();
+            SourceClickEventArgs args = new SourceClickEventArgs(this, 0, tapCount);
+            RaiseSourceClickedEvent(args);
         }
 
-        protected virtual void OnEnable()
+        private void OnHoldStartedEvent(InteractionSourceKind source, Ray headray)
         {
-            if (RecognizerStart == RecognizerStartBehavior.AutoStart)
-            {
-                StartGestureRecognizer();
-            }
+            HoldEventArgs args = new HoldEventArgs(this, 0);
+            RaiseHoldStartedEvent(args);
         }
 
-        /// <summary>
-        /// Make sure the gesture recognizer is off, then start it.
-        /// Otherwise, leave it alone because it's already in the desired state.
-        /// </summary>
-        public void StartGestureRecognizer()
+        private void OnHoldCanceledEvent(InteractionSourceKind source, Ray headray)
         {
-            if (gestureRecognizer != null && !gestureRecognizer.IsCapturingGestures())
-            {
-                gestureRecognizer.StartCapturingGestures();
-            }
-            if (navigationGestureRecognizer != null && !navigationGestureRecognizer.IsCapturingGestures())
-            {
-                navigationGestureRecognizer.StartCapturingGestures();
-            }
+            HoldEventArgs args = new HoldEventArgs(this, 0);
+            RaiseHoldCanceledEvent(args);
         }
 
-        /// <summary>
-        /// Make sure the gesture recognizer is on, then stop it.
-        /// Otherwise, leave it alone because it's already in the desired state.
-        /// </summary>
-        public void StopGestureRecognizer()
+        private void OnHoldCompletedEvent(InteractionSourceKind source, Ray headray)
         {
-            if (gestureRecognizer != null && gestureRecognizer.IsCapturingGestures())
-            {
-                gestureRecognizer.StopCapturingGestures();
-            }
-            if (navigationGestureRecognizer != null && navigationGestureRecognizer.IsCapturingGestures())
-            {
-                navigationGestureRecognizer.StopCapturingGestures();
-            }
+            HoldEventArgs args = new HoldEventArgs(this, 0);
+            RaiseHoldCompletedEvent(args);
         }
 
-        protected void OnTappedEvent(InteractionSourceKind source, int tapCount, Ray headRay)
+        private void OnManipulationStartedEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
         {
-            inputManager.RaiseInputClicked(this, 0, tapCount);
+            ManipulationEventArgs args = new ManipulationEventArgs(this, 0, cumulativeDelta);
+            RaiseManipulationStartedEvent(args);
         }
 
-        protected void OnHoldStartedEvent(InteractionSourceKind source, Ray headray)
+        private void OnManipulationUpdatedEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
         {
-            inputManager.RaiseHoldStarted(this, 0);
+            ManipulationEventArgs args = new ManipulationEventArgs(this, 0, cumulativeDelta);
+            RaiseManipulationUpdatedEvent(args);
         }
 
-        protected void OnHoldCanceledEvent(InteractionSourceKind source, Ray headray)
+        private void OnManipulationCompletedEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
         {
-            inputManager.RaiseHoldCanceled(this, 0);
+            ManipulationEventArgs args = new ManipulationEventArgs(this, 0, cumulativeDelta);
+            RaiseManipulationCompletedEvent(args);
         }
 
-        protected void OnHoldCompletedEvent(InteractionSourceKind source, Ray headray)
+        private void OnManipulationCanceledEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
         {
-            inputManager.RaiseHoldCompleted(this, 0);
+            ManipulationEventArgs args = new ManipulationEventArgs(this, 0, cumulativeDelta);
+            RaiseManipulationCanceledEvent(args);
         }
 
-        protected void OnManipulationStartedEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
+        private void OnNavigationStartedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
         {
-            inputManager.RaiseManipulationStarted(this, 0, cumulativeDelta);
+            NavigationEventArgs args = new NavigationEventArgs(this, 0, normalizedOffset);
+            RaiseNavigationStartedEvent(args);
         }
 
-        protected void OnManipulationUpdatedEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
+        private void OnNavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
         {
-            inputManager.RaiseManipulationUpdated(this, 0, cumulativeDelta);
+            NavigationEventArgs args = new NavigationEventArgs(this, 0, normalizedOffset);
+            RaiseNavigationUpdatedEvent(args);
         }
 
-        protected void OnManipulationCompletedEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
+        private void OnNavigationCompletedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
         {
-            inputManager.RaiseManipulationCompleted(this, 0, cumulativeDelta);
+            NavigationEventArgs args = new NavigationEventArgs(this, 0, normalizedOffset);
+            RaiseNavigationCompletedEvent(args);
         }
 
-        protected void OnManipulationCanceledEvent(InteractionSourceKind source, Vector3 cumulativeDelta, Ray headray)
+        private void OnNavigationCanceledEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
         {
-            inputManager.RaiseManipulationCanceled(this, 0, cumulativeDelta);
-        }
-
-        protected void OnNavigationStartedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
-        {
-            inputManager.RaiseNavigationStarted(this, 0, normalizedOffset);
-        }
-
-        protected void OnNavigationUpdatedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
-        {
-            inputManager.RaiseNavigationUpdated(this, 0, normalizedOffset);
-        }
-
-        protected void OnNavigationCompletedEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
-        {
-            inputManager.RaiseNavigationCompleted(this, 0, normalizedOffset);
-        }
-
-        protected void OnNavigationCanceledEvent(InteractionSourceKind source, Vector3 normalizedOffset, Ray headray)
-        {
-            inputManager.RaiseNavigationCanceled(this, 0, normalizedOffset);
+            NavigationEventArgs args = new NavigationEventArgs(this, 0, normalizedOffset);
+            RaiseNavigationCanceledEvent(args);
         }
 
         public override bool TryGetPosition(uint sourceId, out Vector3 position)

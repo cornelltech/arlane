@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.VR.WSA;
 using HoloToolkit.Unity.SpatialMapping;
@@ -28,15 +29,6 @@ namespace HoloToolkit.Unity
         /// </summary>
         [Tooltip("Max time per frame in milliseconds to spend processing the mesh")]
         public float MaxFrameTime = 5.0f;
-        private float MaxFrameTimeInSeconds
-        {
-            get { return (MaxFrameTime / 1000); }
-        }
-
-        /// <summary>
-        ///  Whether to create mesh colliders. If unchecked, mesh colliders will be empty and disabled.
-        /// </summary>
-        public bool CreateMeshColliders = true;
 
         private bool drawProcessedMesh = true;
         // Properties
@@ -72,7 +64,7 @@ namespace HoloToolkit.Unity
         /// <summary>
         /// To prevent us from importing too often, we keep track of the last import.
         /// </summary>
-        private float timeLastImportedMesh = 0;
+        private DateTime timeLastImportedMesh = DateTime.Now;
 
         /// <summary>
         /// For a cached SpatialUnderstanding.Instance.
@@ -94,25 +86,18 @@ namespace HoloToolkit.Unity
             /// <summary>
             /// Lists of verts/triangles that describe the mesh geometry.
             /// </summary>
-            private readonly List<Vector3> verts = new List<Vector3>();
-            private readonly List<int> tris = new List<int>();
+            private List<Vector3> verts = new List<Vector3>();
+            private List<int> tris = new List<int>();
 
             /// <summary>
             /// The mesh object based on the triangles passed in.
             /// </summary>
-            public readonly Mesh MeshObject = new Mesh();
+            public Mesh MeshObject { get; private set;}
 
-            /// <summary>
-            /// The MeshCollider with which this mesh is associated. Must be set even if
-            /// no collision mesh will be created.
-            /// </summary>
-            public MeshCollider SpatialCollider = null;
-
-            /// <summary>
-            /// Whether to create collision mesh. If false, the MeshCollider attached to this
-            /// object will also be disabled when Commit() is called.
-            /// </summary>
-            public bool CreateMeshCollider = false;
+            public MeshData()
+            {
+                MeshObject = new Mesh();
+            }
 
             /// <summary>
             /// Clears the geometry, but does not clear the mesh.
@@ -132,20 +117,9 @@ namespace HoloToolkit.Unity
                 if (verts.Count > 2)
                 {
                     MeshObject.SetVertices(verts);
-                    MeshObject.SetTriangles(tris, 0);
+                    MeshObject.SetTriangles(tris.ToArray(), 0);
                     MeshObject.RecalculateNormals();
                     MeshObject.RecalculateBounds();
-                    // The null assignment is required by Unity in order to pick up the new mesh
-                    SpatialCollider.sharedMesh = null;
-                    if (CreateMeshCollider)
-                    {
-                        SpatialCollider.sharedMesh = MeshObject;
-                        SpatialCollider.enabled = true;
-                    }
-                    else
-                    {
-                        SpatialCollider.enabled = false;
-                    }
                 }
             }
 
@@ -155,7 +129,7 @@ namespace HoloToolkit.Unity
             /// <param name="point1">First point on the triangle.</param>
             /// <param name="point2">Second point on the triangle.</param>
             /// <param name="point3">Third point on the triangle.</param>
-            public void AddTriangle(Vector3 point1, Vector3 point2, Vector3 point3)
+            public void AddTriangle(Vector3 point1, Vector3 point2, Vector3 point3) 
             {
                 // Currently spatial understanding in the native layer voxellizes the space 
                 // into ~2000 voxels per cubic meter.  Even in a degerate case we 
@@ -191,7 +165,7 @@ namespace HoloToolkit.Unity
 
         private void Update()
         {
-            Update_MeshImport();
+            Update_MeshImport(Time.deltaTime);
         }
 
         /// <summary>
@@ -207,23 +181,8 @@ namespace HoloToolkit.Unity
             MeshData nextSectorData;
             if (!meshSectors.TryGetValue(sector, out nextSectorData))
             {
-                nextSectorData = new MeshData();
-                nextSectorData.CreateMeshCollider = CreateMeshColliders;
-
-                int surfaceObjectIndex = SurfaceObjects.Count;
-
-                SurfaceObject surfaceObject = CreateSurfaceObject(
-                  mesh: nextSectorData.MeshObject,
-                  objectName: string.Format("SurfaceUnderstanding Mesh-{0}", surfaceObjectIndex),
-                  parentObject: transform,
-                  meshID: surfaceObjectIndex,
-                  drawVisualMeshesOverride: DrawProcessedMesh);
-
-                nextSectorData.SpatialCollider = surfaceObject.Collider;
-
-                AddSurfaceObject(surfaceObject);
-
                 // Or make it if this is a new sector.
+                nextSectorData = new MeshData();
                 meshSectors.Add(sector, nextSectorData);
             }
 
@@ -237,9 +196,6 @@ namespace HoloToolkit.Unity
         /// <returns></returns>
         public IEnumerator Import_UnderstandingMesh()
         {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            int startFrameCount = Time.frameCount;
-
             if (!spatialUnderstanding.AllowSpatialUnderstanding || IsImportActive)
             {
                 yield break;
@@ -272,9 +228,7 @@ namespace HoloToolkit.Unity
             }
 
             // Wait a frame
-            stopwatch.Stop();
             yield return null;
-            stopwatch.Start();
 
             // Create output meshes
             if ((meshVertices != null) &&
@@ -288,7 +242,7 @@ namespace HoloToolkit.Unity
                     meshdata.Reset();
                 }
 
-                float startTime = Time.realtimeSinceStartup;
+                DateTime startTime = DateTime.Now;
                 // first we need to split the playspace up into segments so we don't always 
                 // draw everything.  We can break things up in to cubic meters.  
                 for (int index = 0; index < meshIndices.Length; index += 3)
@@ -306,7 +260,7 @@ namespace HoloToolkit.Unity
 
                     // If the second sector doesn't match the first, copy the triangle to the second sector.
                     Vector3 secondSector = VectorToSector(secondVertex);
-                    if (secondSector != firstSector)
+                    if(secondSector != firstSector)
                     {
                         AddTriangleToSector(secondSector, firstVertex, secondVertex, thirdVertex);
                     }
@@ -320,41 +274,58 @@ namespace HoloToolkit.Unity
                     }
 
                     // Limit our run time so that we don't cause too many frame drops.
-                    // Only checking every few iterations or so to prevent losing too much time to checking the clock.
-                    if ((index % 30 == 0) && ((Time.realtimeSinceStartup - startTime) > MaxFrameTimeInSeconds))
+                    // Only checking every 10 iterations or so to prevent losing too much time to checking the clock.
+                    if (index % 30 == 0 && (DateTime.Now - startTime).TotalMilliseconds > MaxFrameTime)
                     {
                         //  Debug.LogFormat("{0} of {1} processed", index, meshIndices.Length);
-                        stopwatch.Stop();
                         yield return null;
-                        stopwatch.Start();
-                        startTime = Time.realtimeSinceStartup;
+                        startTime = DateTime.Now;
                     }
                 }
 
-                startTime = Time.realtimeSinceStartup;
+                startTime = DateTime.Now;
 
                 // Now we have all of our triangles assigned to the correct mesh, we can make all of the meshes.
                 // Each sector will have its own mesh.
-                foreach (MeshData meshData in meshSectors.Values)
+                for (int meshSectorsIndex = 0; meshSectorsIndex < meshSectors.Values.Count;meshSectorsIndex++)
                 {
+                    // Make a object to contain the mesh, mesh renderer, etc or reuse one from before.
+                    // It shouldn't matter if we switch which one of these has which mesh from call to call.
+                    // (Actually there is potential that a sector won't render for a few frames, but this should
+                    // be rare).
+                    if (SurfaceObjects.Count <= meshSectorsIndex)
+                    {
+                        AddSurfaceObject(null, string.Format("SurfaceUnderstanding Mesh-{0}", meshSectorsIndex), transform);
+                    }
+
+                    // Get the next MeshData.
+                    MeshData meshData = meshSectors.Values.ElementAt(meshSectorsIndex);
+                    
                     // Construct the mesh.
                     meshData.Commit();
 
+                    // Assign the mesh to the surface object.
+                    SurfaceObjects[meshSectorsIndex].Filter.sharedMesh = meshData.MeshObject;
+
                     // Make sure we don't build too many meshes in a single frame.
-                    if ((Time.realtimeSinceStartup - startTime) > MaxFrameTimeInSeconds)
+                    if ((DateTime.Now - startTime).TotalMilliseconds > MaxFrameTime)
                     {
-                        stopwatch.Stop();
                         yield return null;
-                        stopwatch.Start();
-                        startTime = Time.realtimeSinceStartup;
+                        startTime = DateTime.Now;
                     }
+                }
+
+                // The current flow of the code shouldn't allow for there to be more Surfaces than sectors.
+                // In the future someone might want to destroy meshSectors where there is no longer any 
+                // geometry.
+                if (SurfaceObjects.Count > meshSectors.Values.Count)
+                {
+                    Debug.Log("More surfaces than mesh sectors. This is unexpected");
                 }
             }
 
             // Wait a frame
-            stopwatch.Stop();
             yield return null;
-            stopwatch.Start();
 
             // All done - can free up marshal pinned memory
             dll.UnpinAllObjects();
@@ -363,18 +334,7 @@ namespace HoloToolkit.Unity
             IsImportActive = false;
 
             // Mark the timestamp
-            timeLastImportedMesh = Time.time;
-
-            stopwatch.Stop();
-            int deltaFrameCount = (Time.frameCount - startFrameCount + 1);
-
-            if (stopwatch.Elapsed.TotalSeconds > 0.75)
-            {
-                Debug.LogWarningFormat("Import_UnderstandingMesh took {0:N0} frames ({1:N3} ms)",
-                    deltaFrameCount,
-                    stopwatch.Elapsed.TotalMilliseconds
-                    );
-            }
+            timeLastImportedMesh = DateTime.Now;
         }
 
         /// <summary>
@@ -392,11 +352,12 @@ namespace HoloToolkit.Unity
         /// Updates the mesh import process. This function will kick off the import 
         /// coroutine at the requested internal.
         /// </summary>
-        private void Update_MeshImport()
+        /// <param name="deltaTime"></param>
+        private void Update_MeshImport(float deltaTime)
         {
             // Only update every so often
             if (IsImportActive || (ImportMeshPeriod <= 0.0f) ||
-                ((Time.time - timeLastImportedMesh) < ImportMeshPeriod) ||
+                ((DateTime.Now - timeLastImportedMesh).TotalSeconds < ImportMeshPeriod) ||
                 (spatialUnderstanding.ScanState != SpatialUnderstanding.ScanStates.Scanning))
             {
                 return;

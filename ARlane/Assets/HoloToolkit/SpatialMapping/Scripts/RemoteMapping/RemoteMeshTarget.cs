@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 #endif
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace HoloToolkit.Unity.SpatialMapping
 {
@@ -92,18 +93,18 @@ namespace HoloToolkit.Unity.SpatialMapping
                     // For each mesh, create a GameObject to render it.
                     for (int index = 0; index < meshes.Count; index++)
                     {
-                        int meshID = SurfaceObjects.Count;
+                        GameObject surface = AddSurfaceObject(meshes[index], string.Format("Beamed-{0}", SurfaceObjects.Count), transform);
+                        surface.transform.parent = SpatialMappingManager.Instance.transform;
 
-                        SurfaceObject surface = CreateSurfaceObject(
-                            mesh: meshes[index],
-                            objectName: "Beamed-" + meshID,
-                            parentObject: transform,
-                            meshID: meshID
-                            );
+                        if (SpatialMappingManager.Instance.DrawVisualMeshes == false)
+                        {
+                            surface.GetComponent<MeshRenderer>().enabled = false;
+                        }
 
-                        surface.Object.transform.parent = SpatialMappingManager.Instance.transform;
-
-                        AddSurfaceObject(surface);
+                        if (SpatialMappingManager.Instance.CastShadows == false)
+                        {
+                            surface.GetComponent<MeshRenderer>().shadowCastingMode = ShadowCastingMode.Off;
+                        }
                     }
 
                     // Finally disconnect.

@@ -149,7 +149,7 @@ namespace HoloToolkit.Unity.SpatialMapping
 
                     // Remove vertices from any mesh that intersects with the bounds.
                     Vector3[] verts = mesh.vertices;
-                    HashSet<int> vertsToRemove = new HashSet<int>();
+                    List<int> vertsToRemove = new List<int>();
 
                     // Find which mesh vertices are within the bounds.
                     for (int i = 0; i < verts.Length; ++i)

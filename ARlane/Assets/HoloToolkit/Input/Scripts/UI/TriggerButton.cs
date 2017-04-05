@@ -30,7 +30,7 @@ namespace HoloToolkit.Unity.InputModule
             }
         }
 
-        public void OnInputClicked(InputClickedEventData eventData)
+        public void OnInputClicked(InputEventData eventData)
         {
             if (IsEnabled)
             {

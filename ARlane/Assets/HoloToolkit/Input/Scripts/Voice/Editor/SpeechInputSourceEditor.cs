@@ -1,6 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-
+﻿using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,17 +7,11 @@ namespace HoloToolkit.Unity.InputModule
     [CustomEditor(typeof(SpeechInputSource))]
     public class SpeechInputSourceEditor : Editor
     {
-        private SerializedProperty recognizerStart;
-        private SerializedProperty keywordsAndKeys;
-
-        private void OnEnable()
-        {
-            recognizerStart = serializedObject.FindProperty("RecognizerStart");
-            keywordsAndKeys = serializedObject.FindProperty("Keywords");
-        }
-
         public override void OnInspectorGUI()
         {
+            SerializedProperty recognizerStart = serializedObject.FindProperty("RecognizerStart");
+            SerializedProperty keywordsAndKeys = serializedObject.FindProperty("Keywords");
+
             serializedObject.Update();
             // the RecognizerStart field
             EditorGUILayout.PropertyField(recognizerStart);

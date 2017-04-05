@@ -4,10 +4,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
 namespace HoloToolkit.Unity.SpatialMapping
 {
     public class FileSurfaceObserver : SpatialMappingSource
@@ -35,18 +31,33 @@ namespace HoloToolkit.Unity.SpatialMapping
 
             Cleanup();
 
+            List<Mesh> storedMeshes = new List<Mesh>();
             try
             {
-                IList<Mesh> storedMeshes = MeshSaver.Load(fileName);
+                storedMeshes.AddRange(MeshSaver.Load(fileName));
 
-                for(int iMesh = 0; iMesh < storedMeshes.Count; iMesh++)
+                foreach (Mesh mesh in storedMeshes)
                 {
-                    AddSurfaceObject(CreateSurfaceObject(
-                        mesh: storedMeshes[iMesh],
-                        objectName: "storedmesh-" + iMesh,
-                        parentObject: transform,
-                        meshID: iMesh
-                        ));
+                    GameObject surface = AddSurfaceObject(mesh, "storedmesh-" + SurfaceObjects.Count, transform);
+                    Renderer meshRenderer = surface.GetComponent<MeshRenderer>();
+
+                    if (SpatialMappingManager.Instance.DrawVisualMeshes == false)
+                    {
+                        meshRenderer.enabled = false;
+                    }
+
+                    if (SpatialMappingManager.Instance.CastShadows == false)
+                    {
+                        meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                    }
+
+                    // Reset the surface mesh collider to fit the updated mesh. 
+                    // Unity tribal knowledge indicates that to change the mesh assigned to a
+                    // mesh collider, the mesh must first be set to null.  Presumably there
+                    // is a side effect in the setter when setting the shared mesh to null.
+                    MeshCollider meshCollider = surface.GetComponent<MeshCollider>();
+                    meshCollider.sharedMesh = null;
+                    meshCollider.sharedMesh = surface.GetComponent<MeshFilter>().mesh;
                 }
             }
             catch
@@ -61,13 +72,13 @@ namespace HoloToolkit.Unity.SpatialMapping
             // Keyboard commands for saving and loading a remotely generated mesh file.
 #if UNITY_EDITOR || UNITY_STANDALONE
             // S - saves the active mesh
-            if (Input.GetKeyUp(SaveFileKey))
+            if (Input.GetKeyUp(KeyCode.S))
             {
                 MeshSaver.Save(MeshFileName, SpatialMappingManager.Instance.GetMeshes());
             }
 
             // L - loads the previously saved mesh into editor and sets it to be the spatial mapping source.
-            if (Input.GetKeyUp(LoadFileKey))
+            if (Input.GetKeyUp(KeyCode.L))
             {
                 SpatialMappingManager.Instance.SetSpatialMappingSource(this);
                 Load(MeshFileName);
@@ -75,21 +86,4 @@ namespace HoloToolkit.Unity.SpatialMapping
 #endif
         }
     }
-
-#if UNITY_EDITOR
-    [CustomEditor(typeof(FileSurfaceObserver))]
-    public class FileSurfaceObserverEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-
-            // Quick way for the user to get access to the room file location.
-            if (GUILayout.Button("Open File Location"))
-            {
-                System.Diagnostics.Process.Start(MeshSaver.MeshFolderName);
-            }
-        }
-    }
-#endif
 }

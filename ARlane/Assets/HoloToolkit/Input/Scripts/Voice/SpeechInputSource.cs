@@ -3,7 +3,6 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Windows.Speech;
 
 namespace HoloToolkit.Unity.InputModule
@@ -42,13 +41,17 @@ namespace HoloToolkit.Unity.InputModule
 
         private KeywordRecognizer keywordRecognizer;
 
-        private SpeechKeywordRecognizedEventData speechKeywordRecognizedEventData;
+        public override SupportedInputEvents SupportedEvents
+        {
+            get
+            {
+                return SupportedInputEvents.SpeechKeyword;
+            }
+        }
 
         protected override void Start()
         {
             base.Start();
-
-            speechKeywordRecognizedEventData = new SpeechKeywordRecognizedEventData(EventSystem.current);
 
             int keywordCount = Keywords.Length;
             if (keywordCount > 0)
@@ -80,7 +83,7 @@ namespace HoloToolkit.Unity.InputModule
             }
         }
 
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
         {
             if (keywordRecognizer != null)
             {
@@ -88,18 +91,24 @@ namespace HoloToolkit.Unity.InputModule
                 keywordRecognizer.OnPhraseRecognized -= KeywordRecognizer_OnPhraseRecognized;
                 keywordRecognizer.Dispose();
             }
+
+            base.OnDestroy();
         }
 
-        protected virtual void OnDisable()
+        protected override void OnDisable()
         {
             if (keywordRecognizer != null)
             {
                 StopKeywordRecognizer();
             }
+
+            base.OnDisable();
         }
 
-        protected virtual void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+
             if (keywordRecognizer != null && RecognizerStart == RecognizerStartBehavior.AutoStart)
             {
                 StartKeywordRecognizer();
@@ -146,20 +155,10 @@ namespace HoloToolkit.Unity.InputModule
             }
         }
 
-        private static readonly ExecuteEvents.EventFunction<ISpeechHandler> OnSpeechKeywordRecognizedEventHandler =
-            delegate (ISpeechHandler handler, BaseEventData eventData)
-            {
-                SpeechKeywordRecognizedEventData casted = ExecuteEvents.ValidateEventData<SpeechKeywordRecognizedEventData>(eventData);
-                handler.OnSpeechKeywordRecognized(casted);
-            };
-
-        protected void OnPhraseRecognized(ConfidenceLevel confidence, TimeSpan phraseDuration, DateTime phraseStartTime, SemanticMeaning[] semanticMeanings, string text)
+        private void OnPhraseRecognized(ConfidenceLevel confidence, TimeSpan phraseDuration, DateTime phraseStartTime, SemanticMeaning[] semanticMeanings, string text)
         {
-            // Create input event
-            speechKeywordRecognizedEventData.Initialize(this, 0, confidence, phraseDuration, phraseStartTime, semanticMeanings, text);
-
-            // Pass handler through HandleEvent to perform modal/fallback logic
-            inputManager.HandleEvent(speechKeywordRecognizedEventData, OnSpeechKeywordRecognizedEventHandler);
+            SpeechKeywordRecognizedEventArgs raiseArgs = new SpeechKeywordRecognizedEventArgs(this, 0, confidence, phraseDuration, phraseStartTime, semanticMeanings, text);
+            RaiseSpeechKeywordRecognizedEvent(raiseArgs);
         }
 
         public override bool TryGetPosition(uint sourceId, out Vector3 position)

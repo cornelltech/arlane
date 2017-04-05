@@ -1,14 +1,11 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
+﻿using UnityEngine;
 
-using UnityEngine;
-
-namespace HoloToolkit.Sharing.Utilities
+namespace HoloToolkit.Sharing
 {
     /// <summary>
-    /// This class enables users to pair with a remote client directly.
-    /// One side should use the Receiver role, the other side should use the Connector role.
-    /// RemoteAddress and RemotePort are used by the Connector role, LocalPort is used by the Receiver.
+    /// Component to pair with a remote client directly.
+    /// One side should use the Receiver roll, the other side should use the Connector roll.
+    /// RemoteAddress and RemotePort are used by the Connector roll, LocalPort is used by the Receiver
     /// </summary>
     public class DirectPairing : MonoBehaviour
     {
@@ -16,7 +13,7 @@ namespace HoloToolkit.Sharing.Utilities
         {
             Connector,
             Receiver
-        }
+        };
 
         public Role PairingRole = Role.Connector;
         public string RemoteAddress = "localhost";
@@ -29,91 +26,93 @@ namespace HoloToolkit.Sharing.Utilities
         private PairingAdapter pairingAdapter;
         private NetworkConnectionAdapter connectionAdapter;
 
-        private void Start()
+
+        void Start()
         {
-            if (PairingRole == Role.Connector)
+            if (this.PairingRole == Role.Connector)
             {
-                pairMaker = new DirectPairConnector(RemoteAddress, RemotePort);
+                this.pairMaker = new DirectPairConnector(this.RemoteAddress, this.RemotePort);
             }
             else
             {
-                pairMaker = new DirectPairReceiver(LocalPort);
+                this.pairMaker = new DirectPairReceiver(this.LocalPort);
             }
 
-            pairingAdapter = new PairingAdapter();
-            pairingAdapter.SuccessEvent += OnPairingConnectionSucceeded;
-            pairingAdapter.FailureEvent += OnPairingConnectionFailed;
+            this.pairingAdapter = new PairingAdapter();
+            this.pairingAdapter.SuccessEvent += OnPairingConnectionSucceeded;
+            this.pairingAdapter.FailureEvent += OnPairingConnectionFailed;
 
             // Register to listen for disconnections, so we can reconnect automatically
             if (SharingStage.Instance != null)
             {
-                sharingMgr = SharingStage.Instance.Manager;
+                this.sharingMgr = SharingStage.Instance.Manager;
 
-                if (sharingMgr != null)
+                if (this.sharingMgr != null)
                 {
-                    connectionAdapter = new NetworkConnectionAdapter();
-                    connectionAdapter.DisconnectedCallback += OnDisconnected;
+                    this.connectionAdapter = new NetworkConnectionAdapter();
+                    this.connectionAdapter.DisconnectedCallback += OnDisconnected;
 
-                    NetworkConnection pairedConnection = sharingMgr.GetPairedConnection();
-                    pairedConnection.AddListener((byte)MessageID.StatusOnly, connectionAdapter);
+                    NetworkConnection pairedConnection = this.sharingMgr.GetPairedConnection();
+                    pairedConnection.AddListener((byte)MessageID.StatusOnly, this.connectionAdapter);
                 }
             }
 
             StartPairing();
         }
 
-        private void OnDestroy()
+
+        void OnDestroy()
         {
             // SharingStage's OnDestroy() might execute first in the script order. Therefore we should check if
             // SharingStage.Instance still exists. Without the instance check, the execution of GetPairingManager
             // on a disposed sharing manager will crash the Unity Editor and application.
-            if (SharingStage.Instance != null && sharingMgr != null)
+            if (SharingStage.Instance != null && this.sharingMgr != null)
             {
                 PairingManager pairingMgr = sharingMgr.GetPairingManager();
-                pairingMgr.CancelPairing(); // Safe to call, even if no pairing is in progress.  Will not cause a disconnect
+                pairingMgr.CancelPairing();	// Safe to call, even if no pairing is in progress.  Will not cause a disconnect
 
                 // Remove our listener from the paired connection
                 NetworkConnection pairedConnection = sharingMgr.GetPairedConnection();
-                pairedConnection.RemoveListener((byte)MessageID.StatusOnly, connectionAdapter);
+                pairedConnection.RemoveListener((byte)MessageID.StatusOnly, this.connectionAdapter);
             }
         }
 
-        private void OnPairingConnectionSucceeded()
+
+        void OnPairingConnectionSucceeded()
         {
-            if (SharingStage.Instance.ShowDetailedLogs)
-            {
-                Debug.Log("Direct Pairing Succeeded");
-            }
+            Debug.Log("Direct Pairing Succeeded");
         }
 
-        private void OnPairingConnectionFailed(PairingResult result)
-        {
-            Debug.LogWarning("Direct pairing failed: " + result);
 
-            if (AutoReconnect)
+        void OnPairingConnectionFailed(PairingResult result)
+        {
+            Debug.LogWarning("Direct pairing failed: " + result.ToString());
+
+            if (this.AutoReconnect)
             {
-                Debug.LogWarning("Attempting to reconnect...");
                 StartPairing();
             }
         }
 
-        private void OnDisconnected(NetworkConnection connection)
+
+        void OnDisconnected(NetworkConnection connection)
         {
             Debug.LogWarning("Remote client disconnected");
 
-            if (AutoReconnect)
+            if (this.AutoReconnect)
             {
                 StartPairing();
             }
         }
 
-        private void StartPairing()
-        {
-            if (sharingMgr != null)
-            {
-                PairingManager pairingMgr = sharingMgr.GetPairingManager();
 
-                PairingResult result = pairingMgr.BeginPairing(pairMaker, pairingAdapter);
+        void StartPairing()
+        {
+            if (this.sharingMgr != null)
+            {
+                PairingManager pairingMgr = this.sharingMgr.GetPairingManager();
+
+                PairingResult result = pairingMgr.BeginPairing(this.pairMaker, this.pairingAdapter);
                 if (result != PairingResult.Ok)
                 {
                     Debug.LogError("Failed to start pairing");

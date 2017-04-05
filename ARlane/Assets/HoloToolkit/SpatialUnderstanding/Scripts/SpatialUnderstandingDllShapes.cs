@@ -25,7 +25,7 @@ namespace HoloToolkit.Unity
         /// <summary>
         /// Result structure returned by shape queries
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct ShapeResult
         {
             public Vector3 position;
@@ -90,7 +90,7 @@ namespace HoloToolkit.Unity
         /// Static construction functions contained in this class can be used
         /// to construct a list of component constraints.
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct ShapeComponentConstraint
         {
             /// <summary>
@@ -628,7 +628,7 @@ namespace HoloToolkit.Unity
         /// <summary>
         /// A shape component definition. Contains a list of component constraints.
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct ShapeComponent
         {
             public ShapeComponent(List<ShapeComponentConstraint> componentConstraints)
@@ -665,7 +665,7 @@ namespace HoloToolkit.Unity
         /// A shape constraint definition. Composed of a type and 
         /// type specific parameters
         /// </summary>
-        [StructLayout(LayoutKind.Sequential, Pack = 1)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct ShapeConstraint
         {
             /// <summary>
@@ -837,13 +837,24 @@ namespace HoloToolkit.Unity
         /// <param name="shapeCount">Length of the array passed in shapeData, the return value will never exceed this value</param>
         /// <param name="shapeData">An array of ShapeResult structures to receive the results of the query</param>
         /// <returns>Number of positions found. This number will never exceed shapeCount (the space provided for the results in shapeData).</returns>
+#if UNITY_METRO && !UNITY_EDITOR
         // Queries (shapes)
         [DllImport("SpatialUnderstanding")]
         public static extern int QueryShape_FindPositionsOnShape(
-            [In, MarshalAs(UnmanagedType.LPStr)] string shapeName,          // char*
+            [In] string shapeName,          // char*
             [In] float minRadius,
-            [In] int shapeCount,                                            // Pass in the space allocated in shapeData
-            [In, Out] IntPtr shapeData);                                    // ShapeResult
+            [In] int shapeCount,            // Pass in the space allocated in shapeData
+            [Out] IntPtr shapeData);        // ShapeResult
+#else
+        public static int QueryShape_FindPositionsOnShape(
+            [In] string shapeName,          // char*
+            [In] float minRadius,
+            [In] int shapeCount,            // Pass in the space allocated in shapeData
+            [Out] IntPtr shapeData)
+        {
+            return 0;
+        }
+#endif
 
         /// <summary>
         /// Finds the set of found shapes of the type specified by shapeName. 
@@ -853,11 +864,21 @@ namespace HoloToolkit.Unity
         /// <param name="shapeCount">Length of the array passed in shapeData, the return value will never exceed this value</param>
         /// <param name="shapeData">An array of ShapeResult structures to receive the results of the query</param>
         /// <returns>Number of shapes found. This number will never exceed shapeCount (the space provided for the results in shapeData).</returns>
+#if UNITY_METRO && !UNITY_EDITOR
         [DllImport("SpatialUnderstanding")]
         public static extern int QueryShape_FindShapeHalfDims(
-            [In, MarshalAs(UnmanagedType.LPStr)] string shapeName,         // char*
-            [In] int shapeCount,                                            // Pass in the space allocated in shapeData
-            [In, Out] IntPtr shapeData);                                    // ShapeResult
+            [In] string shapeName,          // char*
+            [In] int shapeCount,            // Pass in the space allocated in shapeData
+            [Out] IntPtr shapeData);        // ShapeResult
+#else
+        public static int QueryShape_FindShapeHalfDims(
+            [In] string shapeName,          // char*
+            [In] int shapeCount,            // Pass in the space allocated in shapeData
+            [Out] IntPtr shapeData)
+        {
+            return 0;
+        }
+#endif
 
         /// <summary>
         /// Add a shape definition. A shape is defined by a list of components and a 
@@ -870,25 +891,49 @@ namespace HoloToolkit.Unity
         /// <param name="shapeConstraints">Length of the shape constraint array passed in the constraints parameter</param>
         /// <param name="constraints">Array of ShapeConstraint structures</param>
         /// <returns></returns>
+#if UNITY_METRO && !UNITY_EDITOR
         [DllImport("SpatialUnderstanding")]
         public static extern int AddShape(
-            [In, MarshalAs(UnmanagedType.LPStr)] string shapeName,
+            [In] string shapeName,
             [In] int componentCount,
             [In] IntPtr components,         // ShapeComponent
             [In] int shapeConstraints,
             [In] IntPtr constraints);       // ShapeConstraint
+#else
+        public static int AddShape(
+            [In] string shapeName,
+            [In] int componentCount,
+            [In] IntPtr components,         // ShapeComponent
+            [In] int shapeConstraints,
+            [In] IntPtr constraints)        // ShapeConstraint
+        {
+            return 0;
+        }
+#endif
 
         /// <summary>
         /// Runs the shape analysis. This should be called after scanning has been 
         /// finalized and shapes have been defined with AddShape.
         /// </summary>
+#if UNITY_METRO && !UNITY_EDITOR
         [DllImport("SpatialUnderstanding")]
         public static extern void ActivateShapeAnalysis();
+#else
+        public static void ActivateShapeAnalysis()
+        {
+        }
+#endif
 
         /// <summary>
         /// Removes all shapes defined by AddShape.
         /// </summary>
+#if UNITY_METRO && !UNITY_EDITOR
         [DllImport("SpatialUnderstanding")]
         public static extern void RemoveAllShapes();
+#else
+        public static void RemoveAllShapes()
+        {
+        }
+#endif
     }
 }

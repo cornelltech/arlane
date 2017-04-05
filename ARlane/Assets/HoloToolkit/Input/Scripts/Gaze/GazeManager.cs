@@ -106,10 +106,7 @@ namespace HoloToolkit.Unity.InputModule
             {
                 RaycastLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
             }
-        }
 
-        private void Start()
-        {
             if (GazeTransform == null)
             {
                 if (Camera.main != null)

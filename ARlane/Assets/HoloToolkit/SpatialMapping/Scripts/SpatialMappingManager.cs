@@ -1,9 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.SpatialMapping
@@ -50,35 +48,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <summary>
         /// The current source of spatial mapping data.
         /// </summary>
-        public SpatialMappingSource Source
-        {
-            get { return source; }
-
-            private set
-            {
-                if (source != value)
-                {
-                    UpdateRendering(false);
-
-                    var oldSource = source;
-                    source = value;
-
-                    UpdateRendering(DrawVisualMeshes);
-
-                    var handlers = SourceChanged;
-                    if (handlers != null)
-                    {
-                        handlers(this, PropertyChangedEventArgsEx.Create(() => Source, oldSource, source));
-                    }
-                }
-            }
-        }
-        private SpatialMappingSource source;
-
-        /// <summary>
-        /// Occurs when <see cref="Source" /> changes.
-        /// </summary>
-        public event EventHandler<PropertyChangedEventArgsEx<SpatialMappingSource>> SourceChanged;
+        public SpatialMappingSource Source { get; private set; }
 
         // Called when the GameObject is first created.
         protected override void Awake()
@@ -169,7 +139,18 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <param name="mappingSource">The source to switch to. Null means return to the live stream if possible.</param>
         public void SetSpatialMappingSource(SpatialMappingSource mappingSource)
         {
-            Source = (mappingSource ?? surfaceObserver);
+            UpdateRendering(false);
+
+            if (mappingSource == null)
+            {
+                Source = surfaceObserver;
+            }
+            else
+            {
+                Source = mappingSource;
+            }
+
+            UpdateRendering(DrawVisualMeshes);
         }
 
         /// <summary>
@@ -205,14 +186,14 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// </summary>
         public void StartObserver()
         {
-#if UNITY_EDITOR || UNITY_UWP
+#if UNITY_EDITOR
             // Allow observering if a device is present (Holographic Remoting)
             if (!UnityEngine.VR.VRDevice.isPresent) return;
 #endif
             if (!IsObserverRunning())
             {
                 surfaceObserver.StartObserving();
-                StartTime = Time.unscaledTime;
+                StartTime = Time.time;
             }
         }
 
@@ -221,7 +202,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// </summary>
         public void StopObserver()
         {
-#if UNITY_EDITOR || UNITY_UWP
+#if UNITY_EDITOR
             // Allow observering if a device is present (Holographic Remoting)
             if (!UnityEngine.VR.VRDevice.isPresent) return;
 #endif
@@ -264,7 +245,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// Gets all the surface objects associated with the Spatial Mapping mesh.
         /// </summary>
         /// <returns>Collection of SurfaceObjects.</returns>
-        public ReadOnlyCollection<SpatialMappingSource.SurfaceObject> GetSurfaceObjects()
+        public List<SpatialMappingSource.SurfaceObject> GetSurfaceObjects()
         {
             return Source.SurfaceObjects;
         }
@@ -307,18 +288,15 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// <param name="enable">True, if meshes should be rendered.</param>
         private void UpdateRendering(bool enable)
         {
-            if (Source != null)
+            List<MeshRenderer> renderers = Source.GetMeshRenderers();
+            for (int index = 0; index < renderers.Count; index++)
             {
-                List<MeshRenderer> renderers = Source.GetMeshRenderers();
-                for (int index = 0; index < renderers.Count; index++)
+                if (renderers[index] != null)
                 {
-                    if (renderers[index] != null)
+                    renderers[index].enabled = enable;
+                    if (enable)
                     {
-                        renderers[index].enabled = enable;
-                        if (enable)
-                        {
-                            renderers[index].sharedMaterial = SurfaceMaterial;
-                        }
+                        renderers[index].sharedMaterial = SurfaceMaterial;
                     }
                 }
             }

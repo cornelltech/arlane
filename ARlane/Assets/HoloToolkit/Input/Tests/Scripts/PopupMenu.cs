@@ -135,7 +135,7 @@ namespace HoloToolkit.Unity.InputModule.Tests
             Dismiss();
         }
 
-        public void OnInputClicked(InputClickedEventData eventData)
+        public void OnInputClicked(InputEventData eventData)
         {
             if (closeOnNonTargetedTap)
             {

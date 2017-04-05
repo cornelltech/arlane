@@ -1,5 +1,6 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
+﻿//
+// Copyright (C) Microsoft. All rights reserved.
+//
 
 namespace HoloToolkit.Sharing
 {
@@ -9,12 +10,12 @@ namespace HoloToolkit.Sharing
     /// </summary>
     public class ObjectElementAdapter : ObjectElementListener
     {
-        public event System.Action<long, bool> BoolChangedEvent;
         public event System.Action<long, int> IntChangedEvent;
-        public event System.Action<long, long> LongChangedEvent;
-        public event System.Action<long, float> FloatChangedEvent;
         public event System.Action<long, double> DoubleChangedEvent;
+        public event System.Action<long, float> FloatChangedEvent;
+        public event System.Action<long, long> LongChangedEvent;
         public event System.Action<long, XString> StringChangedEvent;
+        public event System.Action<long, bool> BoolChangedEvent;
         public event System.Action<Element> ElementAddedEvent;
         public event System.Action<Element> ElementDeletedEvent;
 
@@ -31,9 +32,9 @@ namespace HoloToolkit.Sharing
         public override void OnIntElementChanged(long elementID, int newValue)
         {
             Profile.BeginRange("OnIntElementChanged");
-            if (this.IntChangedEvent != null)
+            if (IntChangedEvent != null)
             {
-                this.IntChangedEvent(elementID, newValue);
+                IntChangedEvent(elementID, newValue);
             }
             Profile.EndRange();
         }
@@ -46,9 +47,9 @@ namespace HoloToolkit.Sharing
         public override void OnDoubleElementChanged(long elementID, double newValue)
         {
             Profile.BeginRange("OnDoubleElementChanged");
-            if (this.DoubleChangedEvent != null)
+            if (DoubleChangedEvent != null)
             {
-                this.DoubleChangedEvent(elementID, newValue);
+                DoubleChangedEvent(elementID, newValue);
             }
             Profile.EndRange();
         }
@@ -61,9 +62,9 @@ namespace HoloToolkit.Sharing
         public override void OnFloatElementChanged(long elementID, float newValue)
         {
             Profile.BeginRange("OnFloatElementChanged");
-            if (this.FloatChangedEvent != null)
+            if (FloatChangedEvent != null)
             {
-                this.FloatChangedEvent(elementID, newValue);
+                FloatChangedEvent(elementID, newValue);
             }
             Profile.EndRange();
         }
@@ -76,9 +77,9 @@ namespace HoloToolkit.Sharing
         public override void OnLongElementChanged(long elementID, long newValue)
         {
             Profile.BeginRange("OnLongElementChanged");
-            if (this.LongChangedEvent != null)
+            if (LongChangedEvent != null)
             {
-                this.LongChangedEvent(elementID, newValue);
+                LongChangedEvent(elementID, newValue);
             }
             Profile.EndRange();
         }
@@ -91,9 +92,9 @@ namespace HoloToolkit.Sharing
         public override void OnStringElementChanged(long elementID, XString newValue)
         {
             Profile.BeginRange("OnStringElementChanged");
-            if (this.StringChangedEvent != null)
+            if (StringChangedEvent != null)
             {
-                this.StringChangedEvent(elementID, newValue);
+                StringChangedEvent(elementID, newValue);
             }
             Profile.EndRange();
         }
@@ -106,9 +107,9 @@ namespace HoloToolkit.Sharing
         public override void OnBoolElementChanged(long elementID, bool newValue)
         {
             Profile.BeginRange("OnBoolElementChanged");
-            if (this.BoolChangedEvent != null)
+            if (BoolChangedEvent != null)
             {
-                this.BoolChangedEvent(elementID, newValue);
+                BoolChangedEvent(elementID, newValue);
             }
             Profile.EndRange();
         }
@@ -120,9 +121,9 @@ namespace HoloToolkit.Sharing
         public override void OnElementAdded(Element element)
         {
             Profile.BeginRange("OnElementAdded");
-            if (this.ElementAddedEvent != null)
+            if (ElementAddedEvent != null)
             {
-                this.ElementAddedEvent(element);
+                ElementAddedEvent(element);
             }
             Profile.EndRange();
         }
@@ -134,9 +135,9 @@ namespace HoloToolkit.Sharing
         public override void OnElementDeleted(Element element)
         {
             Profile.BeginRange("OnElementDeleted");
-            if (this.ElementDeletedEvent != null)
+            if (ElementDeletedEvent != null)
             {
-                this.ElementDeletedEvent(element);
+                ElementDeletedEvent(element);
             }
             Profile.EndRange();
         }
