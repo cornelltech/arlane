@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="e8ba12f6-215c-42fa-a20c-6b43eaffdfa9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>ARlane</DisplayName>
-    <PublisherDisplayName>DefaultCompany</PublisherDisplayName>
+    <PublisherDisplayName>foundry</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

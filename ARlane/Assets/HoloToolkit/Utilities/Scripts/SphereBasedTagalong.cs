@@ -32,7 +32,6 @@ namespace HoloToolkit.Unity
 
         void Start()
         {
-            
             initialDistanceToCamera = Vector3.Distance(this.transform.position, Camera.main.transform.position);
         }
 

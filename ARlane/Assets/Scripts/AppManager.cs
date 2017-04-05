@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 
-public class Object
-{
-    public int id { get; set; }
-    public string product { get; set; }
-    public bool selected { get; set; }
-}
 
 public class AppManager : MonoBehaviour {
 
@@ -19,12 +13,12 @@ public class AppManager : MonoBehaviour {
 
         print("App Started");
 
-        using (WebClient wc = new WebClient())
-        {
-            var json = wc.DownloadString(API + "/ping");
-            print("Got it");
-            print(json);
-        }
+        // using (WebClient wc = new WebClient())
+        // {
+        //     var json = wc.DownloadString(API + "/ping");
+        //     print("Got it");
+        //     print(json);
+        // }
 
     }
 
