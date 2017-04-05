@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58dd049e38600848823e3466422bee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  API: 
+  API: http://4e416898.ngrok.io
 --- !u!1 &1352536124
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,7 +714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1708691909
 Transform:
   m_ObjectHideFlags: 0
@@ -1040,7 +1040,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1868169922}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1

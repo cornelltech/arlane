@@ -27,8 +27,6 @@ public class ItemManager : MonoBehaviour, IInputClickHandler, IFocusable
     }
 
 
-
-
     public void OnInputClicked(InputEventData eventData)
     {
         
