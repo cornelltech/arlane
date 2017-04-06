@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
@@ -36,18 +37,32 @@ namespace Arlane
 
         void fetchData()
         {
-            using (WebClient wc = new WebClient())
+            WWW www = new WWW(API + "/ping");
+            StartCoroutine(WaitForRequest(www));
+        }
+
+        private IEnumerator WaitForRequest(WWW www)
+        {
+
+            yield return www;
+
+            // check for errors
+            if (www.error == null)
             {
-                var json = wc.DownloadString(API + "/ping");
+                var json = www.text;
                 ProductList res = ProductList.CreateFromJSON(json);
 
                 for (int i = 0; i < res.results.Length; i++)
                 {
-                    // print(res.results[i].product);
+                    print(res.results[i].product);
 
                     // TODO - Update the state of the app
 
                 }
+            }
+            else
+            {
+                Debug.Log("WWW Error: " + www.error);
             }
         }
     }
