@@ -192,6 +192,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011021619270, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d379ed0a5618c9f479f58bd83a2d0ad3, type: 2}
   m_IsPrefabParent: 0
@@ -258,6 +262,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fc0eb6ca0b1e01d49b27ab6bc14e4052, type: 2}
+    - target: {fileID: 23622464598562126, guid: c7daae477d51ca9439b0d1d18b56b745,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7daae477d51ca9439b0d1d18b56b745, type: 2}
   m_IsPrefabParent: 0
@@ -320,6 +329,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: df31ff90142d63b4e89d989e9deac53a, type: 2}
+    - target: {fileID: 23622464598562126, guid: c7daae477d51ca9439b0d1d18b56b745,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7daae477d51ca9439b0d1d18b56b745, type: 2}
   m_IsPrefabParent: 0
@@ -367,7 +381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58dd049e38600848823e3466422bee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  API: http://4e416898.ngrok.io
+  API: http://ec2-52-3-223-71.compute-1.amazonaws.com:5000
   refresh: 100
   store: {fileID: 1306878120235622, guid: f291ebf7675121c4b9560c2b78da9931, type: 2}
 --- !u!114 &1060458101
@@ -570,6 +584,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1566473020429768, guid: d0f49baa0c44be64392ede93758c0010, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23163238685248520, guid: d0f49baa0c44be64392ede93758c0010,
+        type: 2}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

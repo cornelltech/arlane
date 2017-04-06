@@ -10,14 +10,18 @@ namespace Arlane
 {
     public class AppManager : MonoBehaviour
     {
+        public static AppManager instance = null;
 
         public string API;
         public int refresh = 100;
-        public GameObject store;
 
-        public static AppManager instance = null;
+
+        
 
         private int counter;
+        private ProductList data;
+
+        private GameObject jumbotron;
         private GameObject shoppingList;
 
         void Awake()
@@ -31,36 +35,35 @@ namespace Arlane
             }
 
             DontDestroyOnLoad(gameObject);
-
-
-            // Setup the store
-            if( Store.instance == null )
-            {
-                Instantiate(store);
-            }
-
-            // Start fetching data
-            fetchData();
         }
 
         // Use this for initialization
         void Start()
         {
+            // Start fetching data
+            fetchData();
+            
             shoppingList = GameObject.Find("ShoppingList");
+
+            // Hide the shopping list
+            GameObject.Find("ShoppingList").GetComponent<ShoppingListManager>().Hide();
         }
 
         // Update is called once per frame
         void Update()
         {
             counter++;
-
+            
+            // Poll server for data
+            // TODO - this should be done as a coroutine
             if(counter % refresh == 0)
             {
                 fetchData();
             }
         }
 
-        void fetchData()
+
+        private void fetchData()
         {
             WWW www = new WWW(API + "/ping");
             StartCoroutine(WaitForRequest(www));
@@ -78,13 +81,13 @@ namespace Arlane
                 ProductList res = ProductList.CreateFromJSON(json);
 
                 var selectedItems = res.results.Where(x => x.selected).ToArray();
-                ProductList selectedList = new ProductList();
-                selectedList.count = selectedItems.Length;
-                selectedList.results = selectedItems;
+                ProductList selectedProductList = new ProductList();
+                selectedProductList.count = selectedItems.Length;
+                selectedProductList.results = selectedItems;
 
-
-                Store.instance.data = selectedList;
-                
+                data = selectedProductList;
+                // update the list
+                shoppingList.GetComponent<ShoppingListManager>().updateText(data);
             }
             else
             {
