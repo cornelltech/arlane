@@ -12,15 +12,40 @@ namespace Arlane
 
         public string API;
         public int refresh = 100;
+        public GameObject store;
+
+        public static AppManager instance = null;
 
         private int counter;
+        private GameObject shoppingList;
+
+        void Awake()
+        {
+            if ( instance == null )
+            {
+                instance = this;
+            }else if(instance != this)
+            {
+                Destroy(gameObject);
+            }
+
+            DontDestroyOnLoad(gameObject);
+
+
+            // Setup the store
+            if( Store.instance == null )
+            {
+                Instantiate(store);
+            }
+
+            // Start fetching data
+            fetchData();
+        }
 
         // Use this for initialization
         void Start()
         {
-            print("App Started");
-            fetchData();
-
+            //shoppingList = GameObject.Find("ShoppingList").GetComponent<Text>();
         }
 
         // Update is called once per frame
@@ -30,7 +55,6 @@ namespace Arlane
 
             if(counter % refresh == 0)
             {
-                //print("Tick " + counter.ToString());
                 fetchData();
             }
         }
@@ -54,10 +78,7 @@ namespace Arlane
 
                 for (int i = 0; i < res.results.Length; i++)
                 {
-                    print(res.results[i].product);
-
                     // TODO - Update the state of the app
-
                 }
             }
             else

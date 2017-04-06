@@ -51,15 +51,5 @@ namespace Arlane
 
     }
 
-
-
-    public class State
-
-    {
-
-        public ProductList data;
-
-    }
-
 }
 
