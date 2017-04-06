@@ -345,7 +345,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1060458099}
-  - component: {fileID: 1060458101}
   - component: {fileID: 1060458100}
   - component: {fileID: 1060458102}
   m_Layer: 0
@@ -383,18 +382,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   API: http://ec2-52-3-223-71.compute-1.amazonaws.com:5000
   refresh: 100
-  store: {fileID: 1306878120235622, guid: f291ebf7675121c4b9560c2b78da9931, type: 2}
---- !u!114 &1060458101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1060458098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 949257ae1c7d1db488911683765138b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1060458102
 MonoBehaviour:
   m_ObjectHideFlags: 0
