@@ -17,6 +17,11 @@ namespace Arlane
         private Vector3 destination;
         private float journeyLength;
 
+        void Awake()
+        {
+            gameObject.SetActive(false);
+        }
+
         // Use this for initialization
         void Start()
         {
@@ -25,6 +30,7 @@ namespace Arlane
             start = transform.localPosition;
             destination = new Vector3(start.x, start.y + offsetY, start.z);
             journeyLength = Vector3.Distance(start, destination);
+            
         }
 
         // Update is called once per frame
@@ -52,12 +58,12 @@ namespace Arlane
 
         public void Show()
         {
-            transform.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.SetActive(true);
         }
 
         public void Hide()
         {
-            transform.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.SetActive(false);
         }
     }
 

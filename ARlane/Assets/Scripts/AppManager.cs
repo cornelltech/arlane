@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Linq;
 using UnityEngine;
 
 
@@ -45,7 +46,7 @@ namespace Arlane
         // Use this for initialization
         void Start()
         {
-            //shoppingList = GameObject.Find("ShoppingList").GetComponent<Text>();
+            shoppingList = GameObject.Find("ShoppingList");
         }
 
         // Update is called once per frame
@@ -76,10 +77,14 @@ namespace Arlane
                 var json = www.text;
                 ProductList res = ProductList.CreateFromJSON(json);
 
-                for (int i = 0; i < res.results.Length; i++)
-                {
-                    // TODO - Update the state of the app
-                }
+                var selectedItems = res.results.Where(x => x.selected).ToArray();
+                ProductList selectedList = new ProductList();
+                selectedList.count = selectedItems.Length;
+                selectedList.results = selectedItems;
+
+
+                Store.instance.data = selectedList;
+                
             }
             else
             {
