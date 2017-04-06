@@ -420,7 +420,7 @@ PlayerSettings:
       Bluetooth: False
       Chat: False
       CodeGeneration: False
-      EnterpriseAuthentication: True
+      EnterpriseAuthentication: False
       HumanInterfaceDevice: False
       InputInjectionBrokered: False
       InternetClient: True

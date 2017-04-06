@@ -10,19 +10,22 @@ namespace Arlane
 {
     public class AppManager : MonoBehaviour
     {
-        public static AppManager instance = null;
+        
 
         public string API;
         public int refresh = 100;
-
-
-        
+        public bool DEBUG = true    ;
 
         private int counter;
+        private ProductObj focusedItem;
         private ProductList data;
 
         private GameObject jumbotron;
         private GameObject shoppingList;
+        private List<GameObject> items;
+
+
+        public static AppManager instance = null;
 
         void Awake()
         {
@@ -42,11 +45,30 @@ namespace Arlane
         {
             // Start fetching data
             fetchData();
-            
-            shoppingList = GameObject.Find("ShoppingList");
 
-            // Hide the shopping list
+            // Find and hide the shopping list
+            shoppingList = GameObject.Find("ShoppingList");
             GameObject.Find("ShoppingList").GetComponent<ShoppingListManager>().Hide();
+
+            // Get the list of items
+            items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
+
+            foreach (var obj in items)
+            {
+                if (DEBUG)
+                {
+                    obj.GetComponent<ItemComponentManager>().ShowItem();
+                    obj.GetComponent<ItemComponentManager>().ShowCard();
+                }
+                else
+                {
+                    obj.GetComponent<ItemComponentManager>().HideItem();
+                    obj.GetComponent<ItemComponentManager>().HideCard();
+                }
+            }
+            
+
+
         }
 
         // Update is called once per frame

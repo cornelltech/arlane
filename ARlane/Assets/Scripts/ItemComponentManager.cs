@@ -16,16 +16,25 @@ namespace Arlane
     public class ItemComponentManager : MonoBehaviour, IInputClickHandler, IFocusable
     {
 
+        public ProductObj obj;
+
         private GameObject card;
         private CardManager cardManager;
+
+        private GameObject item;
+        private ItemManager itemManager;
 
         // Use this for initialization
         void Start()
         {
-            card = gameObject.transform.Find("Card").gameObject;
-            cardManager = card.GetComponent<CardManager>();
+            item = transform.Find("Item").gameObject;
+            itemManager = item.GetComponent<ItemManager>();
+            itemManager.obj = obj;
 
-            cardManager.isVisible = true;
+            card = transform.Find("Card").gameObject;
+            cardManager = card.GetComponent<CardManager>();
+            cardManager.obj = obj;
+            
         }
 
         // Update is called once per frame
@@ -41,12 +50,31 @@ namespace Arlane
 
         public void OnFocusEnter()
         {
-            //cardManager.isVisible = true;
+
         }
 
         public void OnFocusExit()
         {
-            //cardManager.isVisible = false;
+
+        }
+
+        public void ShowCard()
+        {
+            cardManager.Show();
+        }
+
+        public void HideCard()
+        {
+            cardManager.Hide();
+        }
+
+        public void ShowItem()
+        {
+            itemManager.Show();
+        }
+        public void HideItem()
+        {
+            itemManager.Hide();
         }
     }
 

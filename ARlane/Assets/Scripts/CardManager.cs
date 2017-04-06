@@ -16,10 +16,11 @@ namespace Arlane
     public class CardManager : MonoBehaviour, IInputClickHandler, IFocusable
     {
 
+        public ProductObj obj;
+
         public Material frontCard;
         public Material frontCardActive;
         public int rotationSpeed = 10;
-        public bool isVisible = false;
 
         private GameObject front;
         private GameObject back;
@@ -31,15 +32,6 @@ namespace Arlane
         {
             front = gameObject.transform.Find("Front").gameObject;
             back = gameObject.transform.Find("Back").gameObject;
-
-            if (isVisible)
-            {
-                Show();
-            }
-            else
-            {
-                Hide();
-            }
         }
 
         // Update is called once per frame
@@ -48,15 +40,6 @@ namespace Arlane
             if (canRotate)
             {
                 RotateCard();
-            }
-
-            if (isVisible)
-            {
-                Show();
-            }
-            else
-            {
-                Hide();
             }
         }
 
@@ -92,22 +75,20 @@ namespace Arlane
             }
         }
 
-        private void Show()
+        public void Show()
         {
             if (!front.GetComponent<Renderer>().enabled && !back.GetComponent<Renderer>().enabled)
             {
                 front.GetComponent<Renderer>().enabled = true;
                 back.GetComponent<Renderer>().enabled = true;
-                isVisible = true;
             }
         }
-        private void Hide()
+        public void Hide()
         {
             if (front.GetComponent<Renderer>().enabled && back.GetComponent<Renderer>().enabled)
             {
                 front.GetComponent<Renderer>().enabled = false;
                 back.GetComponent<Renderer>().enabled = false;
-                isVisible = false;
             }
         }
     }
