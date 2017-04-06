@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 
-public class ListItemManager : MonoBehaviour {
+namespace Arlane
+{
+    public class ListItemManager : MonoBehaviour
+    {
 
-    public string text;
+        public string text;
 
-    private GameObject textObj;
+        private GameObject textObj;
 
-	// Use this for initialization
-	void Start () {
-        textObj = transform.Find("3DTextPrefab").gameObject;
-        textObj.GetComponent<TextMesh>().text = text;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        // Use this for initialization
+        void Start()
+        {
+            textObj = transform.Find("3DTextPrefab").gameObject;
+            textObj.GetComponent<TextMesh>().text = text;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+    }
+
 }

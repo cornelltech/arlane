@@ -5,43 +5,48 @@ using UnityEngine.Events;
 using HoloToolkit.Unity.InputModule;
 using System;
 
-
-/// <summary>
-/// Responsible for handling the item events
-/// </summary>
-public class ItemManager : MonoBehaviour, IInputClickHandler, IFocusable
+namespace Arlane
 {
 
-    private GameObject scanner;
-
-    // Use this for initialization
-    void Start()
-    {
-        scanner = transform.Find("Scanner").gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Responsible for handling the item events
+    /// </summary>
+    public class ItemManager : MonoBehaviour, IInputClickHandler, IFocusable
     {
 
+        private GameObject scanner;
+
+        // Use this for initialization
+        void Start()
+        {
+            scanner = transform.Find("Scanner").gameObject;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+
+        public void OnInputClicked(InputEventData eventData)
+        {
+
+        }
+
+        public void OnFocusEnter()
+        {
+            scanner.GetComponent<ScannerManager>().Show();
+            scanner.GetComponent<ScannerManager>().startTime = Time.time;
+            scanner.GetComponent<ScannerManager>().performScan = true;
+        }
+
+        public void OnFocusExit()
+        {
+
+        }
+
     }
 
-
-    public void OnInputClicked(InputEventData eventData)
-    {
-        
-    }
-
-    public void OnFocusEnter()
-    {
-        scanner.GetComponent<ScannerManager>().Show();
-        scanner.GetComponent<ScannerManager>().startTime = Time.time;
-        scanner.GetComponent<ScannerManager>().performScan = true;
-    }
-
-    public void OnFocusExit()
-    {
-
-    }
 
 }

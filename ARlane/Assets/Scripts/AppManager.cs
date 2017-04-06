@@ -4,59 +4,52 @@ using System.Net;
 using UnityEngine;
 
 
-[System.Serializable]
-public class ProductObj
+namespace Arlane
 {
-    public int id;
-    public string product;
-    public bool selected;
-
-    public static ProductObj CreateFromJSON(string jsonString)
+    public class AppManager : MonoBehaviour
     {
-        return JsonUtility.FromJson<ProductObj>(jsonString);
-    }
-}
-[System.Serializable]
-public class ProductList
-{
-    public int count;
-    public ProductObj[] results;
-    
-    public static ProductList CreateFromJSON(string jsonString)
-    {
-        return JsonUtility.FromJson<ProductList>(jsonString);
-    }
-}
 
-public class State
-{
-    public ProductList data;
-}
+        public string API;
+        public int refresh = 100;
 
-public class AppManager : MonoBehaviour {
+        private int counter;
 
-    public string API;
-
-	// Use this for initialization
-	void Start () {
-
-        print("App Started");
-
-        using (WebClient wc = new WebClient())
+        // Use this for initialization
+        void Start()
         {
-            var json = wc.DownloadString(API + "/ping");
-            ProductList res = ProductList.CreateFromJSON(json);
+            print("App Started");
+            fetchData();
 
-            for (int i = 0; i < res.results.Length; i++)
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            counter++;
+
+            if(counter % refresh == 0)
             {
-                print(res.results[i].product);
+                //print("Tick " + counter.ToString());
+                fetchData();
             }
         }
 
-    }
+        void fetchData()
+        {
+            using (WebClient wc = new WebClient())
+            {
+                var json = wc.DownloadString(API + "/ping");
+                ProductList res = ProductList.CreateFromJSON(json);
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
+                for (int i = 0; i < res.results.Length; i++)
+                {
+                    // print(res.results[i].product);
+
+                    // TODO - Update the state of the app
+
+                }
+            }
+        }
+    }
 }
+
