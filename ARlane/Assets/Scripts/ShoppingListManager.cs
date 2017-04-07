@@ -63,12 +63,10 @@ namespace Arlane
 
         public void Show()
         {
-            print("Show shopping list");
             gameObject.SetActive(true);
         }
         public void Hide()
         {
-            print("Hide shopping list");
             gameObject.SetActive(false);
         }
     }

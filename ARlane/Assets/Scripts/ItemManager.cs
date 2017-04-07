@@ -40,20 +40,19 @@ namespace Arlane
 
         public void OnFocusEnter()
         {
-            StartScan();
-
+            transform.parent.GetComponent<ItemComponentManager>().setFocused(true);
         }
 
         public void OnFocusExit()
         {
-
+            transform.parent.GetComponent<ItemComponentManager>().setFocused(false);
         }
 
         public void StartScan()
         {
             scanner.GetComponent<ScannerManager>().Show();
             scanner.GetComponent<ScannerManager>().startTime = Time.time;
-            scanner.GetComponent<ScannerManager>().performScan = true;
+            scanner.GetComponent<ScannerManager>().StartScan();
         }
 
         public void Show()

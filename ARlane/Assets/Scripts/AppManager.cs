@@ -58,12 +58,10 @@ namespace Arlane
                 if (DEBUG)
                 {
                     obj.GetComponent<ItemComponentManager>().ShowItem();
-                    obj.GetComponent<ItemComponentManager>().ShowCard();
                 }
                 else
                 {
                     obj.GetComponent<ItemComponentManager>().HideItem();
-                    obj.GetComponent<ItemComponentManager>().HideCard();
                 }
             }
             
@@ -114,6 +112,24 @@ namespace Arlane
             else
             {
                 Debug.Log("WWW Error: " + www.error);
+            }
+        }
+
+        public void SetActiveItem(ProductObj obj)
+        {
+
+            focusedItem = obj;
+            
+        }
+        public void HideUnfocusedCards()
+        {
+            foreach (var item in items)
+            {
+
+                if (item.GetComponent<ItemComponentManager>().obj.id != focusedItem.id)
+                {
+                    item.GetComponent<ItemComponentManager>().HideCard();
+                }
             }
         }
     }

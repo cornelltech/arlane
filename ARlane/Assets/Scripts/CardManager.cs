@@ -77,19 +77,14 @@ namespace Arlane
 
         public void Show()
         {
-            if (!front.GetComponent<Renderer>().enabled && !back.GetComponent<Renderer>().enabled)
-            {
-                front.GetComponent<Renderer>().enabled = true;
-                back.GetComponent<Renderer>().enabled = true;
-            }
+
+            gameObject.SetActive(true);
+            
         }
         public void Hide()
         {
-            if (front.GetComponent<Renderer>().enabled && back.GetComponent<Renderer>().enabled)
-            {
-                front.GetComponent<Renderer>().enabled = false;
-                back.GetComponent<Renderer>().enabled = false;
-            }
+            gameObject.SetActive(false);
+        
         }
     }
 

@@ -24,9 +24,14 @@ namespace Arlane
         private GameObject item;
         private ItemManager itemManager;
 
+        private bool focused = false;
+        private bool scanning = false;
+        private bool cardVisible = false;
+
         // Use this for initialization
         void Start()
         {
+
             item = transform.Find("Item").gameObject;
             itemManager = item.GetComponent<ItemManager>();
             itemManager.obj = obj;
@@ -34,7 +39,8 @@ namespace Arlane
             card = transform.Find("Card").gameObject;
             cardManager = card.GetComponent<CardManager>();
             cardManager.obj = obj;
-            
+            HideCard();
+
         }
 
         // Update is called once per frame
@@ -61,11 +67,13 @@ namespace Arlane
         public void ShowCard()
         {
             cardManager.Show();
+            cardVisible = true;
         }
 
         public void HideCard()
         {
             cardManager.Hide();
+            cardVisible = false;
         }
 
         public void ShowItem()
@@ -75,6 +83,30 @@ namespace Arlane
         public void HideItem()
         {
             itemManager.Hide();
+        }
+        public void setFocused(bool isFocused)
+        {
+     
+            if (isFocused)
+            {
+                AppManager.instance.SetActiveItem(obj);
+            }
+
+            if(isFocused && !cardVisible && !focused && !scanning)
+            {
+                itemManager.StartScan();
+            }
+
+            focused = isFocused;
+        }
+        public void setScanning(bool isScanning)
+        {
+            scanning = isScanning;
+            if(!isScanning)
+            {
+                ShowCard();
+                AppManager.instance.HideUnfocusedCards();
+            }
         }
     }
 

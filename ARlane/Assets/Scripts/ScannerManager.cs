@@ -8,7 +8,7 @@ namespace Arlane
     {
 
         public float offsetY = 2f;
-        public float speed = 1f;
+        public float speed = 1.5f;
         public float startTime;
 
         public bool performScan = false;
@@ -30,7 +30,7 @@ namespace Arlane
             start = transform.localPosition;
             destination = new Vector3(start.x, start.y + offsetY, start.z);
             journeyLength = Vector3.Distance(start, destination);
-            
+            Debug.Log(speed);
         }
 
         // Update is called once per frame
@@ -40,6 +40,12 @@ namespace Arlane
             {
                 updatePosition();
             }
+        }
+
+        public void StartScan()
+        {
+            performScan = true;
+            transform.parent.parent.GetComponent<ItemComponentManager>().setScanning(true);
         }
 
         void updatePosition()
@@ -52,6 +58,7 @@ namespace Arlane
             {
                 performScan = false;
                 transform.localPosition = start;
+                transform.parent.parent.GetComponent <ItemComponentManager> ().setScanning(false);
                 Hide();
             }
         }
