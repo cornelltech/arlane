@@ -14,36 +14,37 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
     WorldAnchorStore anchorStore;
 
     bool Placing = false;
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         WorldAnchorStore.GetAsync(AnchorStoreReady);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Placing)
-        {
-            gameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
-        }
-	}
+    }
 
     void AnchorStoreReady(WorldAnchorStore store)
     {
         anchorStore = store;
         Placing = true;
 
-        Debug.Log("Looking for " + ObjectAnchorStoreName);
+        Debug.Log("looking for " + ObjectAnchorStoreName);
         string[] ids = anchorStore.GetAllIds();
-        for (int i=0; i<ids.Length; i++)
+        for (int index = 0; index < ids.Length; index++)
         {
-            Debug.Log(ids[i]);
-            if (ids[i] == ObjectAnchorStoreName)
+            Debug.Log(ids[index]);
+            if (ids[index] == ObjectAnchorStoreName)
             {
-                WorldAnchor wa = anchorStore.Load(ids[i], gameObject);
+                WorldAnchor wa = anchorStore.Load(ids[index], gameObject);
+                Placing = false;
+                break;
             }
-            Placing = false;
-            break;
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Placing)
+        {
+            gameObject.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 2;
         }
     }
 
@@ -61,13 +62,12 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
             {
                 Debug.Log("Saving persisted position immediately");
                 bool saved = anchorStore.Save(ObjectAnchorStoreName, attachingAnchor);
-                Debug.Log("Saved: " + saved);
+                Debug.Log("saved: " + saved);
             }
             else
             {
                 attachingAnchor.OnTrackingChanged += AttachingAnchor_OnTrackingChanged;
             }
-
         }
         else
         {
@@ -78,30 +78,31 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
             }
 
             string[] ids = anchorStore.GetAllIds();
-            for (int i = 0; i < ids.Length; i++)
+            for (int index = 0; index < ids.Length; index++)
             {
-                Debug.Log(ids[i]);
-                if (ids[i] == ObjectAnchorStoreName)
+                Debug.Log(ids[index]);
+                if (ids[index] == ObjectAnchorStoreName)
                 {
-                    bool deleted = anchorStore.Delete(ids[i]);
-                    Debug.Log("Deleted: " + deleted);
+                    bool deleted = anchorStore.Delete(ids[index]);
+                    Debug.Log("deleted: " + deleted);
                     break;
                 }
             }
         }
 
         Placing = !Placing;
-
     }
 
     private void AttachingAnchor_OnTrackingChanged(WorldAnchor self, bool located)
     {
         if (located)
         {
-            Debug.Log("Saving persisted position in callbacl");
+            Debug.Log("Saving persisted position in callback");
             bool saved = anchorStore.Save(ObjectAnchorStoreName, self);
             Debug.Log("saved: " + saved);
             self.OnTrackingChanged -= AttachingAnchor_OnTrackingChanged;
         }
     }
+
+    
 }
