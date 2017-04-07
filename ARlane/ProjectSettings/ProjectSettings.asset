@@ -400,8 +400,9 @@ PlayerSettings:
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 00aa4c4d56ccd301
   metroApplicationDescription: ARlane
-  wsaImages: {}
-  metroTileShortName: 
+  wsaImages:
+    852048: 
+  metroTileShortName: ARlane
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0

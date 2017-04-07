@@ -18,7 +18,7 @@ namespace Arlane
         private int counter;
         private ProductObj focusedItem;
         private ProductList data;
-
+        private IEnumerator coroutine;
         private GameObject jumbotron;
         private GameObject shoppingList;
         private List<GameObject> items;
@@ -42,8 +42,8 @@ namespace Arlane
         // Use this for initialization
         void Start()
         {
-            // Start fetching data
-            fetchData();
+            // Start fetching data every 1s
+            InvokeRepeating("FetchData", 0.0f, 1.0f);
 
             // Find and hide the shopping list
             shoppingList = GameObject.Find("ShoppingList");
@@ -53,50 +53,48 @@ namespace Arlane
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
 
             // Hide the items by default
-            HideItems();
-
+            // HideItems();
+            
 
         }
 
         // Update is called once per frame
         void Update()
         {
-            counter++;
             
-            // Poll server for data
-            // TODO - this should be done as a coroutine
-            if(counter % refresh == 0)
-            {
-                fetchData();
-            }
         }
 
 
-        private void fetchData()
+        private void FetchData()
         {
+            Debug.Log("Fetch Data");
             WWW www = new WWW(API + "/ping");
-            StartCoroutine(WaitForRequest(www));
+            
+            coroutine = WaitForRequest(www);
+            StartCoroutine(coroutine);
         }
 
         private IEnumerator WaitForRequest(WWW www)
         {
-
+            Debug.Log("Coroutine");
             yield return www;
 
             // check for errors
             if (www.error == null)
             {
-                var json = www.text;
+                Debug.Log("Fetched Data");
+                string json = www.text;
+                Debug.Log(json);
                 ProductList res = ProductList.CreateFromJSON(json);
 
-                var selectedItems = res.results.Where(x => x.selected).ToArray();
+                ProductObj[] selectedItems = res.results.Where(x => x.selected).ToArray();
                 ProductList selectedProductList = new ProductList();
                 selectedProductList.count = selectedItems.Length;
                 selectedProductList.results = selectedItems;
 
                 data = selectedProductList;
                 // update the list
-                shoppingList.GetComponent<ShoppingListManager>().updateText(data);
+                shoppingList.GetComponent<ShoppingListManager>().UpdateText(selectedProductList);
             }
             else
             {
@@ -106,9 +104,7 @@ namespace Arlane
 
         public void SetActiveItem(ProductObj obj)
         {
-
-            focusedItem = obj;
-            
+            focusedItem = obj;   
         }
 
         public void ShowItems()
@@ -152,17 +148,15 @@ namespace Arlane
 
             return null;
         }
+
         public void DismissItem()
         {
-            GameObject obj = GetFocusedItemComponent();
-            
-            if(obj != null)
+            foreach (var item in items)
             {
-                focusedItem = null;
-                obj.GetComponent<ItemComponentManager>().Dismiss();
+                item.GetComponent<ItemComponentManager>().Dismiss();
             }
-            
         }
+
         public void CheckItem()
         {
             foreach (var item in data.results)
@@ -173,6 +167,23 @@ namespace Arlane
                 }
             }
             DismissItem();
+        }
+        
+        public bool isActiveObj(ProductObj obj)
+        {
+            if(focusedItem != null)
+            {
+                return focusedItem.id == obj.id;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
+        public bool hasActiveObj()
+        {
+            return focusedItem != null;
         }
     }
 }

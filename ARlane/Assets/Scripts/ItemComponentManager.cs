@@ -87,17 +87,18 @@ namespace Arlane
         public void setFocused(bool isFocused)
         {
      
-            if (isFocused)
-            {
-                AppManager.instance.SetActiveItem(obj);
-            }
-
-            if(isFocused && !cardVisible && !focused && !scanning)
+            //if(isFocused && !cardVisible && !focused && !scanning)
+            if(!AppManager.instance.hasActiveObj() && AppManager.instance.isActiveObj(obj) && !cardVisible && !scanning)
             {
                 itemManager.StartScan();
-            }
+                if (isFocused)
+                {
+                    AppManager.instance.SetActiveItem(obj);
+                }
 
-            focused = isFocused;
+                focused = isFocused;
+            }
+            
         }
         public void setScanning(bool isScanning)
         {

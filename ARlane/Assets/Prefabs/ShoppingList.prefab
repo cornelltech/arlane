@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4646781224097800}
   - component: {fileID: 23163238685248520}
-  - component: {fileID: 114718179858444556}
   - component: {fileID: 65817586694959006}
+  - component: {fileID: 114718179858444556}
   - component: {fileID: 114986463453415528}
   - component: {fileID: 114162605498226234}
   - component: {fileID: 114145996392639262}
@@ -182,13 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e352ec538a0a38045b15ec445f327c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  list:
-  - id: 0
-    product: Apples
-    selected: 0
-  - id: 0
-    product: Cream
-    selected: 0
   listItemPrefab: {fileID: 1000013198843976, guid: bfdc7f60d7205c84f82a4806a5352d60,
     type: 2}
   listItemFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
