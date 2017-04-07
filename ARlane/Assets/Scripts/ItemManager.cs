@@ -50,9 +50,9 @@ namespace Arlane
 
         public void StartScan()
         {
-            scanner.GetComponent<ScannerManager>().Show();
-            scanner.GetComponent<ScannerManager>().startTime = Time.time;
-            scanner.GetComponent<ScannerManager>().StartScan();
+            scannerManager.Show();
+            scannerManager.startTime = Time.time;
+            scannerManager.StartScan();
         }
 
         public void Show()
