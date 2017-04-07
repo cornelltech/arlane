@@ -108,6 +108,11 @@ namespace Arlane
                 AppManager.instance.HideUnfocusedCards();
             }
         }
+
+        public void Dismiss()
+        {
+            HideCard();
+        }
     }
 
 

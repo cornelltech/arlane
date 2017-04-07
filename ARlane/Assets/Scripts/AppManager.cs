@@ -10,7 +10,6 @@ namespace Arlane
 {
     public class AppManager : MonoBehaviour
     {
-        
 
         public string API;
         public int refresh = 100;
@@ -116,9 +115,7 @@ namespace Arlane
         {
             foreach (var obj in items)
             {
-
                 obj.GetComponent<ItemComponentManager>().ShowItem();
-
             }
         }
         public void HideItems()
@@ -141,6 +138,36 @@ namespace Arlane
                     item.GetComponent<ItemComponentManager>().HideCard();
                 }
             }
+        }
+
+        public GameObject GetFocusedItemComponent()
+        {
+            foreach (var item in items)
+            {
+                if( item.GetComponent<ItemComponentManager>().obj.id == focusedItem.id)
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+        public void DismissItem()
+        {
+            GameObject obj = GetFocusedItemComponent();
+            Debug.Log("Here is the obj");
+            Debug.Log(obj);
+
+            if(obj != null)
+            {
+                focusedItem = null;
+                obj.GetComponent<ItemComponentManager>().Dismiss();
+            }
+            
+        }
+        public void CheckItem()
+        {
+            DismissItem();
         }
     }
 }
