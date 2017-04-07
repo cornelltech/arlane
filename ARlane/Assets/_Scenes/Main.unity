@@ -190,7 +190,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -205,6 +205,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: Contadina Pasta sauce
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
@@ -251,7 +256,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -266,6 +271,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: Bai Antioxidant Infusion Variety Pack
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
@@ -312,7 +322,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -327,6 +337,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: Starbucks Ground Coffee, Breakfast Blend
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
@@ -362,7 +377,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 729086945}
-  - {fileID: 699905499}
   - {fileID: 305103998}
   - {fileID: 140044956}
   - {fileID: 213679541}
@@ -458,7 +472,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -474,6 +488,11 @@ Prefab:
       propertyPath: obj.product
       value: Honey Nut Cheerios
       objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
   m_IsPrefabParent: 0
@@ -482,63 +501,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b,
     type: 2}
   m_PrefabInternal: {fileID: 522486002}
---- !u!1001 &699905498
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 448903136}
-    m_Modifications:
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102540798065572, guid: e054fe396ac06f34e8cbad309910a88b,
-        type: 2}
-      propertyPath: obj.id
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114102540798065572, guid: e054fe396ac06f34e8cbad309910a88b,
-        type: 2}
-      propertyPath: obj.product
-      value: Twin Tree Gardens Premium spices Oregano
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
-  m_IsPrefabParent: 0
---- !u!4 &699905499 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b,
-    type: 2}
-  m_PrefabInternal: {fileID: 699905498}
 --- !u!1001 &729086944
 Prefab:
   m_ObjectHideFlags: 0
@@ -632,7 +594,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -647,6 +609,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: Antibacterial hand soap
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
@@ -693,7 +660,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -708,6 +675,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: L.A. Girl Beauty Brick Eyeshadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
@@ -754,7 +726,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -769,6 +741,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: Kleenex Anti-Viral Facial Tissue
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
@@ -1020,7 +997,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -1035,6 +1012,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: Late July Snacks Tortilla Chips
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
@@ -1134,7 +1116,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1608403156502594, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
       propertyPath: m_Name
@@ -1149,6 +1131,11 @@ Prefab:
         type: 2}
       propertyPath: obj.product
       value: Sensodyne ProNamel Gentle Whitening Flouride Toothpaste
+      objectReference: {fileID: 0}
+    - target: {fileID: 114448332026504346, guid: e054fe396ac06f34e8cbad309910a88b,
+        type: 2}
+      propertyPath: ObjectAnchorStoreName
+      value: item-6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e054fe396ac06f34e8cbad309910a88b, type: 2}
