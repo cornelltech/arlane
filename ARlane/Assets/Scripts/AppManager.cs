@@ -53,18 +53,8 @@ namespace Arlane
             // Get the list of items
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
 
-            foreach (var obj in items)
-            {
-                if (DEBUG)
-                {
-                    obj.GetComponent<ItemComponentManager>().ShowItem();
-                }
-                else
-                {
-                    obj.GetComponent<ItemComponentManager>().HideItem();
-                }
-            }
-            
+            // Hide the items by default
+            HideItems();
 
 
         }
@@ -121,6 +111,26 @@ namespace Arlane
             focusedItem = obj;
             
         }
+
+        public void ShowItems()
+        {
+            foreach (var obj in items)
+            {
+
+                obj.GetComponent<ItemComponentManager>().ShowItem();
+
+            }
+        }
+        public void HideItems()
+        {
+            foreach (var obj in items)
+            {
+                
+                obj.GetComponent<ItemComponentManager>().HideItem();
+                
+            }
+        }
+
         public void HideUnfocusedCards()
         {
             foreach (var item in items)
