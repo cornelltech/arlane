@@ -155,9 +155,7 @@ namespace Arlane
         public void DismissItem()
         {
             GameObject obj = GetFocusedItemComponent();
-            Debug.Log("Here is the obj");
-            Debug.Log(obj);
-
+            
             if(obj != null)
             {
                 focusedItem = null;
@@ -167,6 +165,13 @@ namespace Arlane
         }
         public void CheckItem()
         {
+            foreach (var item in data.results)
+            {
+                if( item.id == focusedItem.id )
+                {
+                    item.selected = false;
+                }
+            }
             DismissItem();
         }
     }
