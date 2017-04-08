@@ -26,8 +26,15 @@ ARlane\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
 ARlane\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
 ARlane\bin\x86\Release\AppX\Assets\SplashScreen.scale-200.png: 60618416282ED104FD1473935716045D
 ARlane\bin\x86\Release\AppX\Assets\Square150x150Logo.scale-200.png: E02834B4A5DFB97FF8E212C1CACBB084
-ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.scale-200.png: 6C6EF27184ABE9D870A9D564953775DE
-ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: 156637F7B5363E983E7A46D8E533A23D
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.scale-100.png: 701B3EAFAA3C39160C07406AEDF2780A
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.scale-125.png: 6A1E3F4A5DDA99D87B533DED03BD59AC
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.scale-150.png: 112924B6ECC65952CF8A2D99EFFEFB72
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.scale-200.png: modified
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.scale-400.png: 082ADCAE0CEB37D4E73A39D350C11DF1
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.targetsize-16_altform-unplated.png: B2B8741DADCBB87F5B2390663988B5D7
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.targetsize-24_altform-unplated.png: modified
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.targetsize-256_altform-unplated.png: E357530B72507D1815E34ADE14DA89C6
+ARlane\bin\x86\Release\AppX\Assets\Square44x44Logo.targetsize-48_altform-unplated.png: 65104CF8B26F412EAEFDE67DFA713AEF
 ARlane\bin\x86\Release\AppX\Assets\StoreLogo.png: 90BD194CA4A7CFFF3E8B8222229857FB
 ARlane\bin\x86\Release\AppX\Assets\Wide310x150Logo.scale-200.png: C96846A80DF667F87355569CD816192D
 ARlane\bin\x86\Release\AppX\Properties\Default.rd.xml: 72EB282657164E79A1C42F6240984826
