@@ -402,6 +402,15 @@ PlayerSettings:
   metroApplicationDescription: ARlane
   wsaImages:
     852048: 
+    2031632: Assets/Images/Branding/Arlane Logo 16.png
+    2031640: Assets/Images/Branding/Arlane Logo 24.png
+    2031664: Assets/Images/Branding/Arlane Logo 48.png
+    2031716: Assets/Images/Branding/Arlane Logo 44.png
+    2031741: Assets/Images/Branding/Arlane Logo 55.png
+    2031766: Assets/Images/Branding/Arlane Logo 66.png
+    2031816: Assets/Images/Branding/Arlane Logo 88.png
+    2031872: Assets/Images/Branding/Arlane Logo 256.png
+    2032016: Assets/Images/Branding/Arlane Logo 176.png
   metroTileShortName: ARlane
   metroCommandLineArgsFile: 
   metroTileShowName: 0
