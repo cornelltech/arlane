@@ -82,9 +82,9 @@ namespace Arlane
             // check for errors
             if (www.error == null)
             {
-                Debug.Log("Fetched Data");
+                //Debug.Log("Fetched Data");
                 string json = www.text;
-                Debug.Log(json);
+                //Debug.Log(json);
                 ProductList res = ProductList.CreateFromJSON(json);
 
                 ProductObj[] selectedItems = res.results.Where(x => x.selected).ToArray();
@@ -155,6 +155,7 @@ namespace Arlane
             {
                 item.GetComponent<ItemComponentManager>().Dismiss();
             }
+            focusedItem = null;
         }
 
         public void CheckItem()
@@ -177,7 +178,7 @@ namespace Arlane
             }
             else
             {
-                return true;
+                return false;
             }
             
         }

@@ -45,7 +45,7 @@ namespace Arlane
 
         public void OnFocusExit()
         {
-            transform.parent.GetComponent<ItemComponentManager>().setFocused(false);
+
         }
 
         public void StartScan()

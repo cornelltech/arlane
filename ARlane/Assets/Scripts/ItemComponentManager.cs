@@ -86,9 +86,7 @@ namespace Arlane
         }
         public void setFocused(bool isFocused)
         {
-     
-            //if(isFocused && !cardVisible && !focused && !scanning)
-            if(!AppManager.instance.hasActiveObj() && AppManager.instance.isActiveObj(obj) && !cardVisible && !scanning)
+            if(!AppManager.instance.hasActiveObj() && !AppManager.instance.isActiveObj(obj))
             {
                 itemManager.StartScan();
                 if (isFocused)
