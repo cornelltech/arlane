@@ -53,7 +53,7 @@ namespace Arlane
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
 
             // Hide the items by default
-            // HideItems();
+            HideItems();
             
 
         }
