@@ -28,13 +28,13 @@
     <AppXManifest Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\bin\x86\Release\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-04-10T14:27:45.817</Modified>
+      <Modified>2017-04-10T16:11:07.198</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\bin\x86\Release\ARlane.exe">
       <PackagePath>entrypoint\ARlane.exe</PackagePath>
-      <Modified>2017-04-10T14:27:32.937</Modified>
+      <Modified>2017-04-10T16:10:57.112</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\.nuget\packages\Microsoft.ApplicationInsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -498,7 +498,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Resource.res">
       <PackagePath>Resource.res</PackagePath>
-      <Modified>2017-04-10T14:26:07.589</Modified>
+      <Modified>2017-04-10T16:09:59.390</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
@@ -587,11 +587,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\globalgamemanagers">
       <PackagePath>Data\globalgamemanagers</PackagePath>
-      <Modified>2017-04-10T14:25:36.296</Modified>
+      <Modified>2017-04-10T16:09:32.647</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\level0">
       <PackagePath>Data\level0</PackagePath>
-      <Modified>2017-04-10T14:25:34.971</Modified>
+      <Modified>2017-04-10T16:09:30.703</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\Resources\unity default resources">
       <PackagePath>Data\Resources\unity default resources</PackagePath>
@@ -599,31 +599,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\Resources\unity_builtin_extra">
       <PackagePath>Data\Resources\unity_builtin_extra</PackagePath>
-      <Modified>2017-04-10T14:25:45.795</Modified>
+      <Modified>2017-04-10T16:09:38.872</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\globalgamemanagers.assets">
       <PackagePath>Data\globalgamemanagers.assets</PackagePath>
-      <Modified>2017-04-10T14:25:36.545</Modified>
+      <Modified>2017-04-10T16:09:32.822</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\sharedassets0.assets">
       <PackagePath>Data\sharedassets0.assets</PackagePath>
-      <Modified>2017-04-10T14:25:42.682</Modified>
+      <Modified>2017-04-10T16:09:36.224</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\level0.resS">
       <PackagePath>Data\level0.resS</PackagePath>
-      <Modified>2017-04-10T14:25:34.945</Modified>
+      <Modified>2017-04-10T16:09:30.677</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\sharedassets0.assets.resS">
       <PackagePath>Data\sharedassets0.assets.resS</PackagePath>
-      <Modified>2017-04-10T14:25:42.678</Modified>
+      <Modified>2017-04-10T16:09:36.220</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\managedAssemblies.txt">
       <PackagePath>Data\managedAssemblies.txt</PackagePath>
-      <Modified>2017-04-10T14:26:07.430</Modified>
+      <Modified>2017-04-10T16:09:59.194</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Data\nativePlugins.txt">
       <PackagePath>Data\nativePlugins.txt</PackagePath>
-      <Modified>2017-04-10T14:26:07.436</Modified>
+      <Modified>2017-04-10T16:09:59.201</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -636,31 +636,31 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\Assembly-CSharp.dll">
       <PackagePath>Assembly-CSharp.dll</PackagePath>
-      <Modified>2017-04-10T14:27:40.901</Modified>
+      <Modified>2017-04-10T16:11:05.430</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\UnityEngine.dll">
       <PackagePath>UnityEngine.dll</PackagePath>
-      <Modified>2017-04-10T14:27:41.921</Modified>
+      <Modified>2017-04-10T16:11:06.413</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\UnityEngine.UI.dll">
       <PackagePath>UnityEngine.UI.dll</PackagePath>
-      <Modified>2017-04-10T14:27:42.045</Modified>
+      <Modified>2017-04-10T16:11:06.550</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\UnityEngine.HoloLens.dll">
       <PackagePath>UnityEngine.HoloLens.dll</PackagePath>
-      <Modified>2017-04-10T14:27:42.077</Modified>
+      <Modified>2017-04-10T16:11:06.593</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\UnityEngine.Networking.dll">
       <PackagePath>UnityEngine.Networking.dll</PackagePath>
-      <Modified>2017-04-10T14:27:42.188</Modified>
+      <Modified>2017-04-10T16:11:06.700</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\UnityEngine.VR.dll">
       <PackagePath>UnityEngine.VR.dll</PackagePath>
-      <Modified>2017-04-10T14:27:42.212</Modified>
+      <Modified>2017-04-10T16:11:06.723</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\avatchinsky\Documents\GitHub\arlane\ARlane\WindowsStoreApp\ARlane\bin\x86\Release\Core\ARlane.exe">
       <PackagePath>ARlane.exe</PackagePath>
-      <Modified>2017-04-10T14:27:45.795</Modified>
+      <Modified>2017-04-10T16:11:07.177</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
