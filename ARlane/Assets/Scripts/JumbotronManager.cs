@@ -1,11 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 
-public class JumbotronManager : MonoBehaviour {
+public class JumbotronManager : MonoBehaviour, IFocusable
+{
+    private MovieTexture movieTexture;
+    private AudioSource audioSrc;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         playVideo();
     }
 	
@@ -16,6 +21,28 @@ public class JumbotronManager : MonoBehaviour {
 
     public void playVideo()
     {
-        ((MovieTexture)GetComponent<Renderer>().material.mainTexture).Play();
+        print("Play video");
+        movieTexture = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
+        movieTexture.loop = true;
+        audioSrc = GetComponent<AudioSource>();
+        audioSrc.clip = movieTexture.audioClip;
+        movieTexture.Play();
+        audioSrc.Play();
+    }
+
+    public void OnFocusEnter()
+    {
+        if (movieTexture && audioSrc)
+        {
+            audioSrc.mute = false;
+        }
+    }
+
+    public void OnFocusExit()
+    {
+        if (movieTexture && audioSrc)
+        {
+            audioSrc.mute = true;
+        }
     }
 }
