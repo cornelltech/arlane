@@ -35,6 +35,7 @@ namespace Arlane
             item = transform.Find("Item").gameObject;
             itemManager = item.GetComponent<ItemManager>();
             itemManager.obj = obj;
+            HideItem();
 
             card = transform.Find("Card").gameObject;
             cardManager = card.GetComponent<CardManager>();
