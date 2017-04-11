@@ -30,7 +30,6 @@ namespace Arlane
             start = transform.localPosition;
             destination = new Vector3(start.x, start.y + offsetY, start.z);
             journeyLength = Vector3.Distance(start, destination);
-            Debug.Log(speed);
         }
 
         // Update is called once per frame
