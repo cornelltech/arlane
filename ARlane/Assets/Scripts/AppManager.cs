@@ -134,11 +134,21 @@ namespace Arlane
         public void HideUnfocusedCards()
         {
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
+
+
             foreach (var item in items)
             {
-                if (item.GetComponent<ItemComponentManager>().obj.id != focusedItem.id)
+                if (focusedItem == null)
                 {
                     item.GetComponent<ItemComponentManager>().HideCard();
+                }
+                else if (focusedItem != null && item.GetComponent<ItemComponentManager>().obj.id != focusedItem.id)
+                {
+                    item.GetComponent<ItemComponentManager>().HideCard();
+                }
+                else
+                {
+                    continue;
                 }
             }
         }
@@ -148,7 +158,7 @@ namespace Arlane
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
             foreach (var item in items)
             {
-                if( item.GetComponent<ItemComponentManager>().obj.id == focusedItem.id)
+                if( focusedItem != null && item.GetComponent<ItemComponentManager>().obj.id == focusedItem.id)
                 {
                     return item;
                 }
