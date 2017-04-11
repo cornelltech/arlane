@@ -15,7 +15,7 @@ namespace Arlane
     {
 
         public ProductObj obj;
-
+        
         private GameObject scanner;
         private ScannerManager scannerManager;
 
@@ -35,12 +35,13 @@ namespace Arlane
 
         public void OnInputClicked(InputEventData eventData)
         {
-
+            AppManager.instance.SetActiveItem(obj);
+            StartScan();
         }
 
         public void OnFocusEnter()
         {
-            transform.parent.GetComponent<ItemComponentManager>().setFocused(true);
+            // transform.parent.GetComponent<ItemComponentManager>().setFocused(true);
         }
 
         public void OnFocusExit()

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class JumbotronManager : MonoBehaviour, IFocusable
 {
-    public string foo;
     private MovieTexture movieTexture;
     private AudioSource audioSrc;
 
@@ -22,7 +21,6 @@ public class JumbotronManager : MonoBehaviour, IFocusable
 
     public void playVideo()
     {
-        print("Play video");
         movieTexture = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
         movieTexture.loop = true;
         audioSrc = GetComponent<AudioSource>();

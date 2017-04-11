@@ -23,7 +23,7 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
     void AnchorStoreReady(WorldAnchorStore store)
     {
         anchorStore = store;
-        Placing = true;
+        //Placing = true;
 
         Debug.Log("looking for " + ObjectAnchorStoreName);
         string[] ids = anchorStore.GetAllIds();

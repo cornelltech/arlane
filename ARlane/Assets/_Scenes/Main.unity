@@ -316,8 +316,9 @@ GameObject:
   - component: {fileID: 239251035}
   - component: {fileID: 239251034}
   - component: {fileID: 239251033}
-  - component: {fileID: 239251037}
   - component: {fileID: 239251038}
+  - component: {fileID: 239251039}
+  - component: {fileID: 239251037}
   m_Layer: 0
   m_Name: Jumbotron
   m_TagString: Untagged
@@ -382,7 +383,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 239251032}
   m_LocalRotation: {x: 0.7010574, y: 0.09229599, z: 0.7010574, w: -0.09229599}
-  m_LocalPosition: {x: 1.05, y: 0.584, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 2}
   m_LocalScale: {x: 0.6, y: 0.34, z: 0.001}
   m_Children: []
   m_Father: {fileID: 0}
@@ -479,6 +480,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &239251039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 239251032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a3163adde5f6084893832c5951c13af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectAnchorStoreName: jumbotron
 --- !u!1001 &305103997
 Prefab:
   m_ObjectHideFlags: 0
@@ -1134,8 +1147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   API: http://ec2-52-3-223-71.compute-1.amazonaws.com:5000
-  refresh: 100
-  DEBUG: 1
 --- !u!114 &1060458102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1154,8 +1165,8 @@ MonoBehaviour:
     Response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1708691910}
-          m_MethodName: Show
+        - m_Target: {fileID: 1060458100}
+          m_MethodName: ShowShoppingList
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1172,8 +1183,8 @@ MonoBehaviour:
     Response:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1708691910}
-          m_MethodName: Hide
+        - m_Target: {fileID: 1060458100}
+          m_MethodName: HideShoppingList
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1329,12 +1340,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4237038019342670, guid: e054fe396ac06f34e8cbad309910a88b,
     type: 2}
   m_PrefabInternal: {fileID: 1583985194}
---- !u!114 &1708691910 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114145996392639262, guid: d0f49baa0c44be64392ede93758c0010,
-    type: 2}
-  m_PrefabInternal: {fileID: 1894731434}
-  m_Script: {fileID: 11500000, guid: e352ec538a0a38045b15ec445f327c72, type: 3}
 --- !u!1001 &1754163551
 Prefab:
   m_ObjectHideFlags: 0
