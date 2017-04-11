@@ -53,8 +53,7 @@ namespace Arlane
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
 
             // Hide the items by default
-            HideItems();
-            
+            HideItems();    
 
         }
 
@@ -185,6 +184,11 @@ namespace Arlane
         public bool hasActiveObj()
         {
             return focusedItem != null;
+        }
+
+        public void EasterEgg()
+        {
+            Debug.Log("Easter Egg");
         }
     }
 }

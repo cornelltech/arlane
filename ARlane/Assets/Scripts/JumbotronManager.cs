@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class JumbotronManager : MonoBehaviour, IFocusable
 {
+    public string foo;
     private MovieTexture movieTexture;
     private AudioSource audioSrc;
 
