@@ -52,12 +52,16 @@ namespace Arlane
             }
             // Hide the shopping list on startup
             HideShoppingList();
+            //ShowShoppingList();
 
             // Get the list of items
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
 
             // Hide the items by default
-            // HideItems();    
+            HideItems();    
+
+            // Start fetching data every 1s
+            InvokeRepeating("FetchData", 0.0f, 1.0f);
 
         }
 
@@ -80,7 +84,7 @@ namespace Arlane
         private IEnumerator WaitForRequest(WWW www)
         {
             yield return www;
-
+            
             // check for errors
             if (www.error == null)
             {
@@ -105,6 +109,8 @@ namespace Arlane
             {
                 Debug.Log("WWW Error: " + www.error);
             }
+
+            www.Dispose();
         }
 
         public void SetActiveItem(ProductObj obj)
@@ -208,21 +214,22 @@ namespace Arlane
         }
 
         public void ShowShoppingList()
-        {
+        {           
             Debug.Log("ShowShoppingList");
             FetchData();
-            shoppingList = GameObject.Find("ShoppingList");
-            shoppingListManager = shoppingList.GetComponent<ShoppingListManager>();
-            shoppingListManager.Show();
+            shoppingListManager.Show();   
         }
 
         public void HideShoppingList()
         {
             Debug.Log("HideShoppingList");
             FetchData();
-            shoppingList = GameObject.Find("ShoppingList");
-            shoppingListManager = shoppingList.GetComponent<ShoppingListManager>();
             shoppingListManager.Hide();
+        }
+
+        public void VoiceTest()
+        {
+            Debug.Log("Voice Workds");
         }
     }
 }
