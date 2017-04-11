@@ -78,13 +78,19 @@ namespace Arlane
 
         public void ShowItem()
         {
-            itemManager.Show();
-            transform.GetComponent<StickyManager>().enabled = true;
+            if(itemManager)
+            {
+                itemManager.Show();
+                transform.GetComponent<StickyManager>().enabled = true;
+            }
         }
         public void HideItem()
         {
-            itemManager.Hide();
-            transform.GetComponent<StickyManager>().enabled = false;
+            if(itemManager)
+            {
+                itemManager.Hide();
+                transform.GetComponent<StickyManager>().enabled = false;
+            }
         }
         public void setFocused(bool isFocused)
         {

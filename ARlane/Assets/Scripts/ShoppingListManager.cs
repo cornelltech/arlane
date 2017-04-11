@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 
 namespace Arlane
 {
-    public class ShoppingListManager : MonoBehaviour
+    public class ShoppingListManager : MonoBehaviour, IInputClickHandler
     {
         public GameObject listItemPrefab;
         public Font listItemFont;
@@ -73,6 +75,11 @@ namespace Arlane
         public void Hide()
         {
             gameObject.SetActive(false);
+        }
+
+        public void OnInputClicked(InputEventData eventData)
+        {
+            AppManager.instance.HideShoppingList();
         }
     }
 

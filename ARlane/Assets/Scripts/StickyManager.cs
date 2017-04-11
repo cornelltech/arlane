@@ -29,7 +29,7 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
         string[] ids = anchorStore.GetAllIds();
         for (int index = 0; index < ids.Length; index++)
         {
-            Debug.Log(ids[index]);
+            // Debug.Log(ids[index]);
             if (ids[index] == ObjectAnchorStoreName)
             {
                 WorldAnchor wa = anchorStore.Load(ids[index], gameObject);
