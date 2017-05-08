@@ -401,6 +401,13 @@ PlayerSettings:
   metroCertificateNotAfter: 00aa4c4d56ccd301
   metroApplicationDescription: ARlane
   wsaImages:
+    131172: Assets/Images/Branding/-SplashScreen.screen-100.png
+    131197: Assets/Images/Branding/-SplashScreen.screen-125.png
+    131212: Assets/Images/Branding/-SplashScreen.screen-140.png
+    131222: Assets/Images/Branding/-SplashScreen.screen-150.png
+    131252: Assets/Images/Branding/-SplashScreen.screen-180.png
+    131272: Assets/Images/Branding/-SplashScreen.screen-200.png
+    131472: Assets/Images/Branding/-SplashScreen.screen-400.png
     852048: 
     2031632: Assets/Images/Branding/Arlane Logo 16.png
     2031640: Assets/Images/Branding/Arlane Logo 24.png
@@ -411,6 +418,26 @@ PlayerSettings:
     2031816: Assets/Images/Branding/Arlane Logo 88.png
     2031872: Assets/Images/Branding/Arlane Logo 256.png
     2032016: Assets/Images/Branding/Arlane Logo 176.png
+    2097252: Assets/Images/Branding/Arlane Logo 71.png
+    2097277: Assets/Images/Branding/Arlane Logo 71@1.25x.png
+    2097302: Assets/Images/Branding/Arlane Logo 71@1.5x.png
+    2097352: Assets/Images/Branding/Arlane Logo 71@2x.png
+    2097552: Assets/Images/Branding/Arlane Logo 71@4x.png
+    2162788: Assets/Images/Branding/Arlane Logo 150.png
+    2162813: Assets/Images/Branding/Arlane Logo 150@1.25x.png
+    2162838: Assets/Images/Branding/Arlane Logo 150@1.5x.png
+    2162888: Assets/Images/Branding/Arlane Logo 150@2x.png
+    2163088: Assets/Images/Branding/Arlane Logo 150@4x.png
+    2228324: Assets/Images/Branding/Arlane Logo 310.png
+    2228349: Assets/Images/Branding/Arlane Logo 310@1.25x.png
+    2228374: Assets/Images/Branding/Arlane Logo 310@1.5x.png
+    2228424: Assets/Images/Branding/Arlane Logo 310@2x.png
+    2228624: Assets/Images/Branding/Arlane Logo 310@4x.png
+    2293860: Assets/Images/Branding/Arlane Logo 310x150.png
+    2293885: Assets/Images/Branding/Arlane Logo 310x150@1.25x.png
+    2293910: Assets/Images/Branding/Arlane Logo 310x150@1.5x.png
+    2293960: Assets/Images/Branding/Arlane Logo 310x150@2x.png
+    2294160: Assets/Images/Branding/Arlane Logo 310x150@4x.png
   metroTileShortName: ARlane
   metroCommandLineArgsFile: 
   metroTileShowName: 0
