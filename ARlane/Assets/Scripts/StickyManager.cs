@@ -25,7 +25,7 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
         anchorStore = store;
         //Placing = true;
 
-        Debug.Log("looking for " + ObjectAnchorStoreName);
+        //Debug.Log("looking for " + ObjectAnchorStoreName);
         string[] ids = anchorStore.GetAllIds();
         for (int index = 0; index < ids.Length; index++)
         {
@@ -60,9 +60,9 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
             WorldAnchor attachingAnchor = gameObject.AddComponent<WorldAnchor>();
             if (attachingAnchor.isLocated)
             {
-                Debug.Log("Saving persisted position immediately");
+                //Debug.Log("Saving persisted position immediately");
                 bool saved = anchorStore.Save(ObjectAnchorStoreName, attachingAnchor);
-                Debug.Log("saved: " + saved);
+                //Debug.Log("saved: " + saved);
             }
             else
             {
@@ -80,11 +80,11 @@ public class StickyManager : MonoBehaviour, IInputClickHandler
             string[] ids = anchorStore.GetAllIds();
             for (int index = 0; index < ids.Length; index++)
             {
-                Debug.Log(ids[index]);
+                //Debug.Log(ids[index]);
                 if (ids[index] == ObjectAnchorStoreName)
                 {
                     bool deleted = anchorStore.Delete(ids[index]);
-                    Debug.Log("deleted: " + deleted);
+                    //Debug.Log("deleted: " + deleted);
                     break;
                 }
             }

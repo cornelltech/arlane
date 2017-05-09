@@ -35,8 +35,8 @@ namespace Arlane
 
         public void UpdateText(ProductList data)
         {
-            Debug.Log("==================");
-            Debug.Log("upadteText()");
+            //Debug.Log("==================");
+            //Debug.Log("upadteText()");
 
             // Cleanup first
             if( children.Count > 0 )
@@ -62,7 +62,7 @@ namespace Arlane
                 
                 children.Add(listItemObj);
 
-                Debug.Log("Product: " + data.results[i].product + " Selected: " + data.results[i].selected);
+                //Debug.Log("Product: " + data.results[i].product + " Selected: " + data.results[i].selected);
             }
         }
 
