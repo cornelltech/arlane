@@ -20,6 +20,8 @@ namespace Arlane
 
         public Material frontCard;
         public Material frontCardActive;
+        public Material backCard;
+        public Material backCardActive;
         public int rotationSpeed = 10;
 
         private GameObject front;
@@ -31,7 +33,10 @@ namespace Arlane
         void Start()
         {
             front = gameObject.transform.Find("Front").gameObject;
+            front.GetComponent<Renderer>().material = frontCard;
+            
             back = gameObject.transform.Find("Back").gameObject;
+            back.GetComponent<Renderer>().material = backCard;
         }
 
         // Update is called once per frame
@@ -54,11 +59,13 @@ namespace Arlane
         public void OnFocusEnter()
         {
             front.GetComponent<Renderer>().material = frontCardActive;
+            back.GetComponent<Renderer>().material = backCardActive;
         }
 
         public void OnFocusExit()
         {
             front.GetComponent<Renderer>().material = frontCard;
+            back.GetComponent<Renderer>().material = backCard;
         }
 
 
