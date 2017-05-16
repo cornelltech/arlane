@@ -51,7 +51,7 @@ namespace Arlane
                 //Debug.Log(data.results[i].product);
 
                 float offset = 0.1f - (i * 0.05f);
-                Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y + offset, transform.localPosition.z);
+                Vector3 pos = new Vector3(transform.localPosition.x - 1.0f, transform.localPosition.y + offset, transform.localPosition.z);
                 Quaternion rot = transform.rotation;
 
                 GameObject listItemObj = Instantiate(listItemPrefab, pos, rot);
