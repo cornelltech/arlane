@@ -11,12 +11,13 @@ namespace Arlane
         public GameObject listItemPrefab;
         public Font listItemFont;
 
+        private GameObject listObj;
         private List<GameObject> children = new List<GameObject>();
 
         // Use this for initialization
         void Start()
         {
-
+            listObj = gameObject.transform.Find("List").gameObject;
         }
 
         // Update is called once per frame
@@ -51,18 +52,19 @@ namespace Arlane
                 //Debug.Log(data.results[i].product);
 
                 float offset = 0.1f - (i * 0.05f);
-                Vector3 pos = new Vector3(transform.localPosition.x - 1.0f, transform.localPosition.y + offset, transform.localPosition.z);
+                Vector3 pos = new Vector3(listObj.transform.localPosition.x, listObj.transform.localPosition.y + offset, listObj.transform.localPosition.z);
                 Quaternion rot = transform.rotation;
 
                 GameObject listItemObj = Instantiate(listItemPrefab, pos, rot);
                 listItemObj.GetComponent<TextMesh>().text = data.results[i].product;
+                listItemObj.GetComponent<TextMesh>().color = Color.black;
                 listItemObj.GetComponent<TextMesh>().offsetZ = -5;
                 //listItemObj.GetComponent<TextMesh>().font = listItemFont;
                 listItemObj.transform.parent = gameObject.transform;
                 
                 children.Add(listItemObj);
 
-                //Debug.Log("Product: " + data.results[i].product + " Selected: " + data.results[i].selected);
+                Debug.Log("Product: " + data.results[i].product + " Selected: " + data.results[i].selected);
             }
         }
 
