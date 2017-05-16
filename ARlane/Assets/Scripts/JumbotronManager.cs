@@ -90,10 +90,8 @@ public class JumbotronManager : MonoBehaviour, IFocusable
 
 
         movieTexture.loop = true;
-
-        //movieTexture.Stop();
-
-        audioSrc.mute = false;
+        
+        audioSrc.mute = true;
 
         movieTexture.Play();
         audioSrc.Play();
