@@ -51,8 +51,8 @@ namespace Arlane
                 shoppingListManager = shoppingList.GetComponent<ShoppingListManager>();
             }
             // Hide the shopping list on startup
-            HideShoppingList();
-            //ShowShoppingList();
+            // HideShoppingList();
+            // ShowShoppingList();
 
             // Get the list of items
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
@@ -120,7 +120,7 @@ namespace Arlane
         public void SetActiveItem(ProductObj obj)
         {
             focusedItem = obj;
-            jumbotronManager.playVideo(0);
+            jumbotronManager.playVideo(obj.id);
             HideUnfocusedCards();
         }
 

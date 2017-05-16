@@ -7,7 +7,15 @@ using UnityEngine;
 public class JumbotronManager : MonoBehaviour, IFocusable
 {
 
-    public MovieTexture video0;
+    public MovieTexture video_bai;
+    public MovieTexture video_cheerios;
+    public MovieTexture video_coffee;
+    public MovieTexture video_oatmeal;
+    public MovieTexture video_oregano;
+    public MovieTexture video_pasta;
+    public MovieTexture video_soap;
+    public MovieTexture video_toothpaste;
+    public MovieTexture video_tortilla;
 
     private MovieTexture movieTexture;
     private AudioSource audioSrc;
@@ -24,18 +32,49 @@ public class JumbotronManager : MonoBehaviour, IFocusable
 
     public void playVideo(int videoKey)
     {
-
-        Debug.Log("===========================");
-
-        Debug.Log("playVideo: ");
-        Debug.Log(videoKey);
-
-        Debug.Log("===========================");
-
         if (videoKey == 0)
         {
-            Debug.Log("Setting movie texture to 0");
-            movieTexture = video0;
+            movieTexture = video_bai;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 1)
+        {
+            movieTexture = video_cheerios;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 2)
+        {
+            movieTexture = video_coffee;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 3)
+        {
+            movieTexture = video_oatmeal;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 4)
+        {
+            movieTexture = video_oregano;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 5)
+        {
+            movieTexture = video_pasta;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 6)
+        {
+            movieTexture = video_soap;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 7)
+        {
+            movieTexture = video_toothpaste;
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
+        }
+        else if (videoKey == 8)
+        {
+            movieTexture = video_tortilla;
             transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else

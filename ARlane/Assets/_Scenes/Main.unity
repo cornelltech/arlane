@@ -438,7 +438,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6568f66089576f4187b17947f5f035e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  video0: {fileID: 15200000, guid: 3b7e376ec8c636647b92f47c1ce571ee, type: 3}
+  video_bai: {fileID: 15200000, guid: ca2befec659e1eb48901e5ea5d901e54, type: 3}
+  video_cheerios: {fileID: 15200000, guid: acdd2304342be5a44a5296456f851050, type: 3}
+  video_coffee: {fileID: 15200000, guid: f806af127fb1614408b25e8d596b5546, type: 3}
+  video_oatmeal: {fileID: 15200000, guid: d40b88edf3f61664eb65aca32078ca72, type: 3}
+  video_oregano: {fileID: 15200000, guid: 9a359aa561161194598b5a3baaeed6ad, type: 3}
+  video_pasta: {fileID: 15200000, guid: 84dc272e5d245da499209678166d81d2, type: 3}
+  video_soap: {fileID: 15200000, guid: 01c5b6d8af411f649bb79e629f149ba8, type: 3}
+  video_toothpaste: {fileID: 15200000, guid: 4761ac67a97437b40ad285f19f0b3a2c, type: 3}
+  video_tortilla: {fileID: 15200000, guid: 336f7405dcf13af48aa46445c26928da, type: 3}
 --- !u!82 &239251038
 AudioSource:
   m_ObjectHideFlags: 0
