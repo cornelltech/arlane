@@ -51,14 +51,18 @@ namespace Arlane
                 shoppingListManager = shoppingList.GetComponent<ShoppingListManager>();
             }
             // Hide the shopping list on startup
-            HideShoppingList();
-            //ShowShoppingList();
+            // HideShoppingList();
+            // ShowShoppingList();
 
             // Get the list of items
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
 
             // Hide the items by default
-            HideItems();    
+            // HideItems();
+
+            // Find the jumbotron
+            jumbotronManager = GameObject.Find("Jumbotron").GetComponent<JumbotronManager>();
+            jumbotronManager.playVideo(-1);
 
             // Start fetching data every 1s
             InvokeRepeating("FetchData", 0.0f, 1.0f);
@@ -74,7 +78,7 @@ namespace Arlane
 
         private void FetchData()
         {
-            Debug.Log("Fetch Data");
+            //Debug.Log("Fetch Data");
             WWW www = new WWW(API + "/ping");
             
             coroutine = WaitForRequest(www);
@@ -88,10 +92,10 @@ namespace Arlane
             // check for errors
             if (www.error == null)
             {
-                Debug.Log("Fetched Data");
+                //Debug.Log("Fetched Data");
                 string json = www.text;
 
-                Debug.Log(json);
+                //Debug.Log(json);
                 ProductList res = ProductList.CreateFromJSON(json);
 
                 ProductObj[] selectedItems = res.results.Where(x => x.selected).ToArray();
@@ -116,6 +120,7 @@ namespace Arlane
         public void SetActiveItem(ProductObj obj)
         {
             focusedItem = obj;
+            jumbotronManager.playVideo(obj.id);
             HideUnfocusedCards();
         }
 
@@ -215,14 +220,14 @@ namespace Arlane
 
         public void ShowShoppingList()
         {           
-            Debug.Log("ShowShoppingList");
+            //Debug.Log("ShowShoppingList");
             FetchData();
             shoppingListManager.Show();   
         }
 
         public void HideShoppingList()
         {
-            Debug.Log("HideShoppingList");
+            //Debug.Log("HideShoppingList");
             FetchData();
             shoppingListManager.Hide();
         }
