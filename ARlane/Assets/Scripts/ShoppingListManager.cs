@@ -51,20 +51,25 @@ namespace Arlane
             {
                 //Debug.Log(data.results[i].product);
 
-                float offset = 0.1f - (i * 0.05f);
-                Vector3 pos = new Vector3(listObj.transform.localPosition.x, listObj.transform.localPosition.y + offset, listObj.transform.localPosition.z);
-                Quaternion rot = transform.rotation;
+                //float offset = 0.1f - (i * 0.05f);
+                //Vector3 pos = new Vector3(0.0f, 0.0f, 0.0f);
+                //Quaternion rot = listObj.transform.rotation;
 
-                GameObject listItemObj = Instantiate(listItemPrefab, pos, rot);
+                GameObject listItemObj = Instantiate(listItemPrefab);
+                listItemObj.transform.parent = listObj.transform;
+
+                float offset = 0.1f - (i * 0.05f);
+
+                listItemObj.transform.localScale = new Vector3(0.02f, 0.02f, 1.0f);
+                listItemObj.transform.localPosition = new Vector3(0.0f, listObj.transform.localPosition.y + offset, 0.0f);
+        
                 listItemObj.GetComponent<TextMesh>().text = data.results[i].product;
                 listItemObj.GetComponent<TextMesh>().color = Color.black;
-                listItemObj.GetComponent<TextMesh>().offsetZ = -5;
-                //listItemObj.GetComponent<TextMesh>().font = listItemFont;
-                listItemObj.transform.parent = gameObject.transform;
-                
+                listItemObj.GetComponent<TextMesh>().fontSize = 18;
+
                 children.Add(listItemObj);
 
-                Debug.Log("Product: " + data.results[i].product + " Selected: " + data.results[i].selected);
+                //Debug.Log(data.results[i].product + " -> (x,y,z): " + listItemObj.transform.position.x + " " + listItemObj.transform.position.y + " " + listItemObj.transform.position.z);
             }
         }
 

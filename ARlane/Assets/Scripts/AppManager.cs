@@ -52,7 +52,7 @@ namespace Arlane
             }
             // Hide the shopping list on startup
             // HideShoppingList();
-            // ShowShoppingList();
+            ShowShoppingList();
 
             // Get the list of items
             items = new List<GameObject>(GameObject.FindGameObjectsWithTag("ItemComponent"));
@@ -65,7 +65,7 @@ namespace Arlane
             jumbotronManager.playVideo(-1);
 
             // Start fetching data every 1s
-            InvokeRepeating("FetchData", 0.0f, 1.0f);
+            //InvokeRepeating("FetchData", 0.0f, 1.0f);
 
         }
 
