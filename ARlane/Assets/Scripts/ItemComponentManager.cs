@@ -52,7 +52,7 @@ namespace Arlane
 
         public void OnInputClicked(InputEventData eventData)
         {
-            
+
         }
 
         public void OnFocusEnter()

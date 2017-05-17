@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class JumbotronManager : MonoBehaviour, IFocusable
 {
-
+    public MovieTexture video_ct;
     public MovieTexture video_bai;
     public MovieTexture video_cheerios;
     public MovieTexture video_coffee;
@@ -19,19 +19,25 @@ public class JumbotronManager : MonoBehaviour, IFocusable
 
     private MovieTexture movieTexture;
     private AudioSource audioSrc;
+    int vsyncprevious;
 
     // Use this for initialization
     void Start () {
         audioSrc = GetComponent<AudioSource>();
+        vsyncprevious = QualitySettings.vSyncCount;
+        QualitySettings.vSyncCount = 0;
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+    }
 
     public void playVideo(int videoKey)
     {
+        Debug.Log("playVideo");
+
         if (videoKey == 0)
         {
             movieTexture = video_bai;
@@ -71,21 +77,30 @@ public class JumbotronManager : MonoBehaviour, IFocusable
         else
         {
             Debug.Log("Defaulting to CT video");
-            movieTexture = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
+            movieTexture = video_ct;
         }
+        Debug.Log("Video is");
         Debug.Log(movieTexture);
-        //DestroyImmediate(transform.GetComponent<Renderer>().material.mainTexture, true); // free memory
-
-
-        if( movieTexture)
+        if ( movieTexture)
         {
+
+            MovieTexture currMovie = (MovieTexture) transform.GetComponent<Renderer>().material.mainTexture;
+
+            Debug.Log(currMovie);
+            currMovie.Stop();
+
+
+            Debug.Log("Playing movie");
+            Debug.Log(movieTexture);
+            // DestroyImmediate(transform.GetComponent<Renderer>().material.mainTexture, true); // free memory
+
             transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
 
             movieTexture.loop = true;
 
             audioSrc.clip = movieTexture.audioClip;
             audioSrc.mute = true;
-
+            
             movieTexture.Play();
             audioSrc.Play();
         }

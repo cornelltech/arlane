@@ -66,6 +66,7 @@ namespace Arlane
 
             // Start fetching data every 1s
             //InvokeRepeating("FetchData", 0.0f, 1.0f);
+            FetchData();
 
         }
 
@@ -78,7 +79,7 @@ namespace Arlane
 
         private void FetchData()
         {
-            //Debug.Log("Fetch Data");
+            Debug.Log("Fetch Data");
             WWW www = new WWW(API + "/ping");
             
             coroutine = WaitForRequest(www);
@@ -108,6 +109,7 @@ namespace Arlane
                 
                 // update the list
                 shoppingListManager.UpdateText(selectedProductList);
+                Debug.Log(json);
             }
             else
             {
