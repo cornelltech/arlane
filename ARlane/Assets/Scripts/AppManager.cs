@@ -119,8 +119,14 @@ namespace Arlane
 
         public void SetActiveItem(ProductObj obj)
         {
+            Debug.Log("SetActiveItem");
+
             focusedItem = obj;
-            jumbotronManager.playVideo(obj.id);
+            if(obj != null)
+            {
+                jumbotronManager.playVideo(obj.id);
+            }
+            
             HideUnfocusedCards();
         }
 

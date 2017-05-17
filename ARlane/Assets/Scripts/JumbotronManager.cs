@@ -35,47 +35,38 @@ public class JumbotronManager : MonoBehaviour, IFocusable
         if (videoKey == 0)
         {
             movieTexture = video_bai;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 1)
         {
             movieTexture = video_cheerios;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 2)
         {
             movieTexture = video_coffee;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 3)
         {
             movieTexture = video_oatmeal;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 4)
         {
             movieTexture = video_oregano;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 5)
         {
             movieTexture = video_pasta;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 6)
         {
             movieTexture = video_soap;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 7)
         {
             movieTexture = video_toothpaste;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else if (videoKey == 8)
         {
             movieTexture = video_tortilla;
-            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
         }
         else
         {
@@ -83,18 +74,22 @@ public class JumbotronManager : MonoBehaviour, IFocusable
             movieTexture = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
         }
         Debug.Log(movieTexture);
-
-        //movieTexture = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
-        
-        audioSrc.clip = movieTexture.audioClip;
+        //DestroyImmediate(transform.GetComponent<Renderer>().material.mainTexture, true); // free memory
 
 
-        movieTexture.loop = true;
-        
-        audioSrc.mute = true;
+        if( movieTexture)
+        {
+            transform.GetComponent<Renderer>().material.mainTexture = movieTexture;
 
-        movieTexture.Play();
-        audioSrc.Play();
+            movieTexture.loop = true;
+
+            audioSrc.clip = movieTexture.audioClip;
+            audioSrc.mute = true;
+
+            movieTexture.Play();
+            audioSrc.Play();
+        }
+       
     }
 
     public void OnFocusEnter()
