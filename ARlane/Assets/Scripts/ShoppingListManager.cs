@@ -53,7 +53,7 @@ namespace Arlane
 
                 //float offset = 0.1f - (i * 0.05f);
                 //Vector3 pos = new Vector3(0.0f, 0.0f, 0.0f);
-                //Quaternion rot = listObj.transform.rotation;
+                Quaternion rot = listObj.transform.rotation;
 
                 GameObject listItemObj = Instantiate(listItemPrefab);
                 listItemObj.transform.parent = listObj.transform;
@@ -62,7 +62,8 @@ namespace Arlane
 
                 listItemObj.transform.localScale = new Vector3(0.02f, 0.02f, 1.0f);
                 listItemObj.transform.localPosition = new Vector3(0.0f, listObj.transform.localPosition.y + offset, 0.0f);
-        
+                listItemObj.transform.localRotation = rot;
+
                 listItemObj.GetComponent<TextMesh>().text = data.results[i].product;
                 listItemObj.GetComponent<TextMesh>().color = Color.black;
                 listItemObj.GetComponent<TextMesh>().fontSize = 18;

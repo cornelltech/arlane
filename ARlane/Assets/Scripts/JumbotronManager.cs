@@ -81,14 +81,13 @@ public class JumbotronManager : MonoBehaviour, IFocusable
         }
         Debug.Log("Video is");
         Debug.Log(movieTexture);
-        if ( movieTexture)
+        if ( movieTexture != null )
         {
 
             MovieTexture currMovie = (MovieTexture) transform.GetComponent<Renderer>().material.mainTexture;
 
             Debug.Log(currMovie);
             currMovie.Stop();
-
 
             Debug.Log("Playing movie");
             Debug.Log(movieTexture);

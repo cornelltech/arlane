@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 239251034}
   - component: {fileID: 239251033}
   - component: {fileID: 239251038}
+  - component: {fileID: 239251040}
   - component: {fileID: 239251039}
   - component: {fileID: 239251037}
   m_Layer: 0
@@ -420,13 +421,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 239251032}
-  m_LocalRotation: {x: 0.41900265, y: 0.11829695, z: 0.8985542, w: -0.05516277}
+  m_LocalRotation: {x: 0.25660488, y: 0.12607867, z: 0.9576622, w: -0.033782683}
   m_LocalPosition: {x: 0, y: 0.5, z: 2}
   m_LocalScale: {x: 0.6, y: 0.34, z: 0.001}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -15, y: 50, z: 180}
+  m_LocalEulerAnglesHint: {x: -15, y: 30, z: 180}
 --- !u!114 &239251037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -540,6 +541,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ObjectAnchorStoreName: jumbotron
+--- !u!114 &239251040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 239251032}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac8d5b128a1d8204fb76c86f47b75912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PivotAxis: 1
 --- !u!1001 &305103997
 Prefab:
   m_ObjectHideFlags: 0
